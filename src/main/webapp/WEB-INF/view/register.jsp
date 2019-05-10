@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
          isELIgnored="false"
@@ -21,11 +22,11 @@
     <div class="login-block">
         <img src="${pageContext.request.contextPath}/resources/image/1.png" alt="Scanfcode">
         <h1>Введите свои данные</h1>
-        <form action="#">
+        <form:form action="registerUser" modelAttribute="user" method="post">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Ваш логин">
+                    <form:input path="login" type="text" class="form-control" placeholder="Ваш логин"/>
                 </div>
             </div>
 
@@ -34,7 +35,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input type="password" class="form-control" placeholder="Ваш пароль">
+                    <form:input path="password" type="password" class="form-control" placeholder="Ваш пароль"/>
                 </div>
             </div>
 
@@ -43,13 +44,13 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                    <input type="text" class="form-control" placeholder="Ваша почта">
+                    <form:input path="email" type="text" class="form-control" placeholder="Ваша почта"/>
                 </div>
             </div>
 
             <button class="btn btn-primary btn-block" type="submit">ЗАРЕГИСТРИРОВАТЬСЯ</button>
 
-        </form>
+        </form:form>
     </div>
 </main>
 
