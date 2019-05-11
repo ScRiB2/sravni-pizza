@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan("ru.scrib.spring")
-public class AppConfig {
+public class AppConfig{
 
     @Bean
     public ViewResolver viewResolver(){
@@ -19,4 +19,5 @@ public class AppConfig {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
+
 }

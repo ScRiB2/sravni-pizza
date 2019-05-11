@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
          isELIgnored="false"
@@ -14,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="shortcut icon" href="https://www.rudebox.org.ua/favicon.ico"/>
     <link rel='stylesheet prefetch' href='https://www.rudebox.org.ua/demo/lessons/styles/style.css'>
-    <link rel="stylesheet" href="<c:url value="/resources/css/login.css" />">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
 </head>
 
 <body class="login-page">
@@ -22,11 +23,12 @@
     <div class="login-block">
         <img src="${pageContext.request.contextPath}/resources/image/1.png" alt="Scanfcode">
         <h1>Введите свои данные</h1>
-        <form action="#">
+        <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
+                   method="post">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Ваш логин">
+                    <input type="text" class="form-control" name="username" placeholder="Ваш логин">
                 </div>
             </div>
 
@@ -35,23 +37,21 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input type="password" class="form-control" placeholder="Ваш пароль">
+                    <input type="password" class="form-control" name="password" placeholder="Ваш пароль">
                 </div>
             </div>
 
             <button class="btn btn-primary btn-block" type="submit">ВОЙТИ НА САЙТ</button>
 
-        </form>
+        </form:form>
     </div>
 
     <div class="login-links">
-        <p class="text-center">Еще нету аккаунта? <a class="txt-brand" href="register"><font color=#29aafe>Регистрируйся</font></a>
+        <p class="text-center">Еще нету аккаунта? <a class="txt-brand" href="register"><font
+                color=#29aafe>Регистрируйся</font></a>
         </p>
     </div>
-
 </main>
-
-
 </body>
 
 </html>

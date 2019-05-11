@@ -8,5 +8,7 @@
 </head>
 <body>
  Здесь ничего нет
+
+<a href="${pageContext.request.contextPath}/admin">Админская панель</a>
 </body>
 </html>
