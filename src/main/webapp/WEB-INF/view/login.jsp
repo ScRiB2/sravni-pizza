@@ -25,6 +25,9 @@
         <h1>Введите свои данные</h1>
         <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
                    method="post">
+            <c:if test="${param.error != null}">
+                <i class="failed">Ошибка! Повторите вход</i>
+            </c:if>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>

@@ -23,6 +23,11 @@
     color:#96a2b2;
     letter-spacing:1px
 }
+.login-block .failed{
+    font-family:Open Sans,sans-serif;
+    color:#CC0000;
+    letter-spacing:1px
+}
 .login-block h1
 {
     font-size:22px;
