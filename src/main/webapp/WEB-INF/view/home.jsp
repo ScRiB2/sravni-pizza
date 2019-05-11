@@ -9,6 +9,6 @@
 <body>
  Здесь ничего нет
 
-<a href="${pageContext.request.contextPath}/admin">Админская панель</a>
+<a href="${pageContext.request.contextPath}/lk">Личный кабинет</a>
 </body>
 </html>
