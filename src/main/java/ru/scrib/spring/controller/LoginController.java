@@ -15,4 +15,14 @@ public class LoginController {
     public String showLkPage(){
         return "lk";
     }
+
+    @GetMapping("/admin")
+    public String showAdminPage(){
+        return "admin";
+    }
+
+    @GetMapping("/access-denied")
+    public String accessDeniedPage(){
+        return "access-denied";
+    }
 }

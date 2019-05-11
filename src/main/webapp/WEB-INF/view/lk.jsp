@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
          isELIgnored="false"
@@ -9,6 +10,8 @@
 </head>
 <body>
 Поздравляю. Вы вошли на сайт!
+
+Здравствуйте, <security:authentication property="principal.username"/>
 
 <form:form action="${pageContext.request.contextPath}/logout" method="post">
     <input type="submit" value="Выйти">
