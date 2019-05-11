@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser(users.username("john").password("1234").roles("EMPLOYEE"))
                 .withUser(users.username("mary").password("1234").roles("MANAGER"))
-                .withUser(users.username("susan").password("1234").roles("ADMIN"));
+                .withUser(users.username("susan").password("1234").roles("ADMIN", "EMPLOYEE"));
     }
 
     @Override
@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
 
         http.logout()
+                .logoutSuccessUrl("/")
                 .permitAll();
 
         http.authorizeRequests()

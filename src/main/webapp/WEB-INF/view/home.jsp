@@ -10,17 +10,26 @@
 </head>
 <body>
 Здесь ничего нет
-<form:form action="${pageContext.request.contextPath}/logout" method="post">
-    <input type="submit" value="Выйти">
-</form:form>
+<security:authorize access="isAnonymous()">
+    <a href="${pageContext.request.contextPath}/login"><font color=#29aafe>Войти</font></a>
+</security:authorize>
+<security:authorize access="isAuthenticated()">
+    <form:form action="${pageContext.request.contextPath}/logout" method="post">
+        <input type="submit" value="Выйти">
+    </form:form>
+</security:authorize>
 
 <hr>
-<p>
-    <a href="${pageContext.request.contextPath}/lk">Личный кабинет пользователя</a>
-</p>
-<p>
-    <a href="${pageContext.request.contextPath}/admin">Кабинет администратора</a>
-</p>
+<security:authorize access="hasRole('EMPLOYEE')">
+    <p>
+        <a href="${pageContext.request.contextPath}/lk">Личный кабинет пользователя</a>
+    </p>
+</security:authorize>
+<security:authorize access="hasRole('ADMIN')">
+    <p>
+        <a href="${pageContext.request.contextPath}/admin">Кабинет администратора</a>
+    </p>
+</security:authorize>
 <hr>
 </body>
 </html>
