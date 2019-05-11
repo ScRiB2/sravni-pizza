@@ -22,11 +22,11 @@
     <div class="login-block">
         <img src="${pageContext.request.contextPath}/resources/image/1.png" alt="Scanfcode">
         <h1>Введите свои данные</h1>
-        <form:form action="registerUser" modelAttribute="user" method="post">
+        <form:form action="registerUser"  method="post">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <form:input path="login" type="text" class="form-control" placeholder="Ваш логин"/>
+                    <input type="text" class="form-control" placeholder="Ваш логин"/>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <form:input path="password" type="password" class="form-control" placeholder="Ваш пароль"/>
+                    <input  type="password" class="form-control" placeholder="Ваш пароль"/>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                    <form:input path="email" type="text" class="form-control" placeholder="Ваша почта"/>
+                    <input type="text" class="form-control" placeholder="Ваша почта"/>
                 </div>
             </div>
 
