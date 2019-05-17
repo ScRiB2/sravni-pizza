@@ -50,7 +50,7 @@
     </div>
 
     <div class="login-links">
-        <p class="text-center">Еще нету аккаунта? <a class="txt-brand"
+        <p class="text-center">Еще нет аккаунта? <a class="txt-brand"
                                                      href="${pageContext.request.contextPath}/register"><font
                 color=#29aafe>Регистрируйся</font></a>
         </p>
