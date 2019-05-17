@@ -20,7 +20,7 @@ def pizza(base_url, headers):
         print(len(divs))
         for i, div in enumerate(divs[:11]):
             title = div.find('div', attrs={'class': 'goods-title'}).text.strip()
-            ingridients = div.find('div', attrs={'class': 'goods-description'}).text.strip()
+            ingridients = div.find('div', attrs={'class': 'goods-description'}).text.strip().split(',')
             price = div.find('div', attrs={'class': 'goods-price'}).text.strip()
             if(i<8):
                 price = int(price[:-1]) * 8
