@@ -10,10 +10,9 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = EmailValidator.class)
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
+
 public @interface ValidEmail {
     String message() default "Неправильно введена почта";
-
     Class<?>[] groups() default {};
-
     Class<? extends Payload>[] payload() default {};
 }
