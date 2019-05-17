@@ -2,6 +2,7 @@ package ru.scrib.spring.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import ru.scrib.spring.validation.ValidEmail;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,6 +31,7 @@ public class CrmUser {
     @Size(min = 1, message = "слишком коротко")
     private String lastName;
 
+    @ValidEmail
     @NotNull(message = "обязательно к заполнению")
     @Size(min = 1, message = "слишком коротко")
     private String email;
