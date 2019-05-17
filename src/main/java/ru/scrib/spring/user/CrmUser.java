@@ -14,28 +14,28 @@ import javax.validation.constraints.Size;
         @FieldMatch(first = "password", second = "matchingPassword", message = "Пароли не совпадают"))
 public class CrmUser {
 
-    @NotNull(message = "обязательно к заполнению")
+    @NotNull(message = "Обязательно к заполнению")
     @Size(min = 3, message = "Должно содержать не меньше 3 символов")
     private String userName;
 
-    @NotNull(message = "обязательно к заполнению")
+    @NotNull(message = "Обязательно к заполнению")
     @Size(min = 1, message = "слишком коротко")
     private String password;
 
-    @NotNull(message = "обязательно к заполнению")
+    @NotNull(message = "Обязательно к заполнению")
     @Size(min = 1, message = "слишком коротко")
     private String matchingPassword;
 
-    @NotNull(message = "обязательно к заполнению")
+    @NotNull(message = "Обязательно к заполнению")
     @Size(min = 1, message = "слишком коротко")
     private String firstName;
 
-    @NotNull(message = "обязательно к заполнению")
+    @NotNull(message = "Обязательно к заполнению")
     @Size(min = 1, message = "слишком коротко")
     private String lastName;
 
     @ValidEmail
-    @NotNull(message = "обязательно к заполнению")
+    @NotNull(message = "Обязательно к заполнению")
     @Size(min = 1, message = "слишком коротко")
     private String email;
 

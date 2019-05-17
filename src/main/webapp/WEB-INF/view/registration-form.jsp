@@ -41,7 +41,7 @@
 				<div style="padding-top: 30px" class="panel-body">
 
 					<!-- Registration Form -->
-					<form:form action="${pageContext.request.contextPath}/register/processRegistrationForm" 
+					<form:form action="${pageContext.request.contextPath}/register/processRegistrationForm"
 						  	   modelAttribute="crmUser"
 						  	   class="form-horizontal">
 
@@ -63,9 +63,9 @@
 					        </div>
 					    </div>
 
-						<!-- User name -->
+						<!-- UserApp name -->
 						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+							<span class="input-group-addon"><i class="glyphicon glyphicon-userApp"></i></span>
 							<form:errors path="userName" cssClass="error" />
 							<form:input path="userName" placeholder="username (*)" class="form-control" />
 						</div>
@@ -87,21 +87,21 @@
 						
 						<!-- First name -->
 						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+							<span class="input-group-addon"><i class="glyphicon glyphicon-userApp"></i></span>
 							<form:errors path="firstName" cssClass="error" />
 							<form:input path="firstName" placeholder="first name (*)" class="form-control" />
 						</div>
 						
 						<!-- Last name -->
 						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+							<span class="input-group-addon"><i class="glyphicon glyphicon-userApp"></i></span>
 							<form:errors path="lastName" cssClass="error" />
 							<form:input path="lastName" placeholder="last name (*)" class="form-control" />
 						</div>
 						
 						<!-- Email -->
 						<div style="margin-bottom: 25px" class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+							<span class="input-group-addon"><i class="glyphicon glyphicon-userApp"></i></span>
 							<form:errors path="email" cssClass="error" />
 							<form:input path="email" placeholder="email (*)" class="form-control" />
 						</div>
