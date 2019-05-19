@@ -20,7 +20,7 @@
 </security:authorize>
 
 <hr>
-<security:authorize access="hasRole('EMPLOYEE')">
+<security:authorize access="hasRole('USER')">
     <p>
         <a href="${pageContext.request.contextPath}/lk">Личный кабинет пользователя</a>
     </p>

@@ -11,12 +11,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import javax.servlet.FilterRegistration;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
@@ -75,6 +77,9 @@ public class AppConfig implements WebMvcConfigurer {
         props.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         props.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        props.setProperty("hibernate.connection.Charset", env.getProperty("hibernate.connection.Charset"));
+        props.setProperty("hibernate.connection.CharacterEncoding", env.getProperty("hibernate.connection.CharacterEncoding"));
+        props.setProperty("hibernate.connection.UseUnicode", env.getProperty("hibernate.connection.UseUnicode"));
 
         return props;
     }
