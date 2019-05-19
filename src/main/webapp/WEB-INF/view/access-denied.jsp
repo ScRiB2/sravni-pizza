@@ -4,10 +4,10 @@
 %>
 <html>
 <head>
-    <title>Панель администратора</title>
+    <title>Доступ запрещён</title>
 </head>
 <body>
-    Это панель администратора! Не балуйтесь в ней)
+    <p>Не хватает прав доступа</p>
     <a href="${pageContext.request.contextPath}/">Вернуться назад</a>
 </body>
 </html>
