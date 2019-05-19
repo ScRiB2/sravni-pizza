@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import ru.scrib.spring.entity.UserApp;
+import ru.scrib.spring.entity.User;
 import ru.scrib.spring.service.UserService;
 
 import javax.servlet.ServletException;
@@ -29,11 +29,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         System.out.println("userName=" + userName);
 
-        UserApp theUserApp = userService.findByUserName(userName);
+        User theUser = userService.findByUserName(userName);
 
         // now place in the session
         HttpSession session = request.getSession();
-        session.setAttribute("user", theUserApp);
+        session.setAttribute("user", theUser);
 
         // forward to home page
 

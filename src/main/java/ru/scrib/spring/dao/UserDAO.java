@@ -1,11 +1,11 @@
 package ru.scrib.spring.dao;
 
-import ru.scrib.spring.entity.UserApp;
+import ru.scrib.spring.entity.User;
 
 public interface UserDAO {
 
-    UserApp findByUserName(String userName);
+    User findByUserName(String userName);
 
-    void save(UserApp userApp);
+    void save(User user);
 
 }

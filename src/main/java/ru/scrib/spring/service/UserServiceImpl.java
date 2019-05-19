@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import ru.scrib.spring.dao.RoleDAO;
 import ru.scrib.spring.dao.UserDAO;
 import ru.scrib.spring.entity.Role;
-import ru.scrib.spring.entity.UserApp;
+import ru.scrib.spring.entity.User;
 import ru.scrib.spring.user.CrmUser;
 
 import javax.transaction.Transactional;
@@ -31,36 +31,36 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Transactional
-    public UserApp findByUserName(String userName) {
+    public User findByUserName(String userName) {
         // check the database if the user already exists
         return userDao.findByUserName(userName);
     }
 
     @Transactional
     public void save(CrmUser crmUser) {
-        UserApp userApp = new UserApp();
-        // assign userApp details to the userApp object
-        userApp.setUserName(crmUser.getUserName());
-        userApp.setPassword(passwordEncoder.encode(crmUser.getPassword()));
-        userApp.setFirstName(crmUser.getFirstName());
-        userApp.setLastName(crmUser.getLastName());
-        userApp.setEmail(crmUser.getEmail());
+        User user = new User();
+        // assign user details to the user object
+        user.setUserName(crmUser.getUserName());
+        user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
+        user.setFirstName(crmUser.getFirstName());
+        user.setLastName(crmUser.getLastName());
+        user.setEmail(crmUser.getEmail());
 
-        // give userApp default role of "employee"
-        userApp.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
+        // give user default role of "employee"
+        user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
 
-        // save userApp in the database
-        userDao.save(userApp);
+        // save user in the database
+        userDao.save(user);
     }
 
     @Transactional
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        UserApp userApp = userDao.findByUserName(userName);
-        if (userApp == null) {
+        User user = userDao.findByUserName(userName);
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(userApp.getUserName(), userApp.getPassword(),
-                mapRolesToAuthorities(userApp.getRoles()));
+        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
+                mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {

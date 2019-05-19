@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.scrib.spring.entity.UserApp;
+import ru.scrib.spring.entity.User;
 
 import java.util.logging.Logger;
 
@@ -19,31 +19,31 @@ public class UserDaoImpl implements UserDAO {
     private Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
-    public UserApp findByUserName(String theUserName) {
+    public User findByUserName(String theUserName) {
         // get the current hibernate session
         Session currentSession = sessionFactory.getCurrentSession();
 
         logger.info("Find by username");
         // now retrieve/read from database using username
-        Query<UserApp> theQuery = currentSession.createQuery("from UserApp where userName=:uName", UserApp.class);
+        Query<User> theQuery = currentSession.createQuery("from User where userName=:uName", User.class);
         theQuery.setParameter("uName", theUserName);
-        UserApp theUserApp = null;
+        User theUser = null;
         try {
-            theUserApp = theQuery.getSingleResult();
+            theUser = theQuery.getSingleResult();
         } catch (Exception e) {
-            theUserApp = null;
+            theUser = null;
         }
 
-        return theUserApp;
+        return theUser;
     }
 
     @Override
-    public void save(UserApp theUserApp) {
+    public void save(User theUser) {
         // get current hibernate session
         Session currentSession = sessionFactory.getCurrentSession();
 
         // create the user ... finally LOL
-        currentSession.saveOrUpdate(theUserApp);
+        currentSession.saveOrUpdate(theUser);
     }
 
 }

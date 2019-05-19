@@ -11,8 +11,8 @@ import java.util.Collection;
 @Setter
 @ToString
 @Entity
-@Table(name = "user_app")
-public class UserApp {
+@Table(name = "user_n")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,10 +42,10 @@ public class UserApp {
     )
     private Collection<Role> roles;
 
-    public UserApp() {
+    public User() {
     }
 
-    public UserApp(String userName, String password, String firstName, String lastName, String email) {
+    public User(String userName, String password, String firstName, String lastName, String email) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
@@ -53,7 +53,7 @@ public class UserApp {
         this.email = email;
     }
 
-    public UserApp(String userName, String password, String firstName, String lastName, String email, Collection<Role> roles) {
+    public User(String userName, String password, String firstName, String lastName, String email, Collection<Role> roles) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 @Configuration
 @EnableWebMvc
@@ -30,6 +31,8 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Autowired
     Environment env;    //For hold data read from properties files
+
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     @Bean
     public ViewResolver viewResolver() {
@@ -54,6 +57,7 @@ public class AppConfig implements WebMvcConfigurer {
             e.printStackTrace();
         }
         securityDataSource.setJdbcUrl(env.getProperty("jdbc.url"));
+        logger.info(env.getProperty("jdbc.url"));
         securityDataSource.setUser(env.getProperty("jdbc.user"));
         securityDataSource.setPassword(env.getProperty("jdbc.password"));
         securityDataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("connection.pool.initialPoolSize")));
@@ -70,6 +74,7 @@ public class AppConfig implements WebMvcConfigurer {
 
         props.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
         props.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+        props.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 
         return props;
     }
@@ -83,7 +88,7 @@ public class AppConfig implements WebMvcConfigurer {
 
         // set the properties
         sessionFactory.setDataSource(securityDataSource());
-        sessionFactory.setPackagesToScan(env.getProperty("hiberante.packagesToScan"));
+        sessionFactory.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
         sessionFactory.setHibernateProperties(getHibernateProperties());
 
         return sessionFactory;

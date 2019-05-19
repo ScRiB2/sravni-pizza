@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ru.scrib.spring.entity.UserApp;
+import ru.scrib.spring.entity.User;
 import ru.scrib.spring.service.UserService;
 import ru.scrib.spring.user.CrmUser;
 
@@ -50,7 +50,7 @@ public class RegistrationController {
         }
 
         // check the database if user already exists
-        UserApp existing = userService.findByUserName(userName);
+        User existing = userService.findByUserName(userName);
         if (existing != null) {
             theModel.addAttribute("crmUser", new CrmUser());
             theModel.addAttribute("registrationError", "Username already exists.");
