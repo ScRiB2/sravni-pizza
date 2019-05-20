@@ -1,6 +1,5 @@
-import time
-
 import requests
+import time
 from bs4 import BeautifulSoup as bs
 
 header = {"accept": "*/*", "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
@@ -23,12 +22,12 @@ def pizza(base_url, headers):
             title = div.find('div', attrs={'class': 'goods-title'}).text.strip()
             ingridients = div.find('div', attrs={'class': 'goods-description'}).text.strip().split(',')
             price = div.find('div', attrs={'class': 'goods-price'}).text.strip()
-            if(i<8):
+            if (i < 8):
                 price = int(price[:-1]) * 8
             else:
                 price = int(price[:-1])
             image = str(div.find('div', attrs={'class': "goods-image goods-image-pizza"}).find('img'))
-            image = 'http://zharpizza.ru' + image[image.find('src') + 5 : -3]
+            image = 'http://zharpizza.ru' + image[image.find('src') + 5: -3]
             print(image)
             print(price)
             print(title)
