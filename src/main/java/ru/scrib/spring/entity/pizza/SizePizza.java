@@ -1,4 +1,3 @@
 package ru.scrib.spring.entity.pizza;
 
-public class SizePizza {
-}
+public enum SizePizza {BIG, MEDIUM, STANDART}
