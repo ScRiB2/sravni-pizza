@@ -1,6 +1,6 @@
 package ru.scrib.spring.dao;
 
-import ru.scrib.spring.entity.User;
+import ru.scrib.spring.entity.user.User;
 
 public interface UserDAO {
 

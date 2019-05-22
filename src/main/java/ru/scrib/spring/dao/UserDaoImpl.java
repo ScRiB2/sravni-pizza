@@ -5,7 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.scrib.spring.entity.User;
+import ru.scrib.spring.entity.user.User;
 
 import java.util.logging.Logger;
 

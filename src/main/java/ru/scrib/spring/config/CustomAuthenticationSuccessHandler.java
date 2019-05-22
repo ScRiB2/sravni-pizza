@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import ru.scrib.spring.entity.User;
+import ru.scrib.spring.entity.user.User;
 import ru.scrib.spring.service.UserService;
 
 import javax.servlet.ServletException;
