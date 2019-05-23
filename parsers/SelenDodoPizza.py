@@ -1,6 +1,6 @@
-import csv
 from selenium import webdriver
-
+import psycopg2 as p2
+from contextlib import closing
 
 def write_csv(data):
     with open('DodoPizzas.csv', 'a', newline="", encoding='utf-8') as f:
@@ -32,7 +32,7 @@ def pizza(url, driver):
     print("start")
     pizzas_div = driver.find_element_by_id('pizzas')
     pizza_container = pizzas_div.find_elements_by_class_name('menu__section-row-outer')
-
+    pizzik = []
     for pizzas in pizza_container:
         pizzas = pizzas.find_elements_by_class_name(
             'product__inner.product__inner_meta.product__inner_meta-with-controls')
@@ -41,22 +41,34 @@ def pizza(url, driver):
                 'product__image-img').get_attribute('src')
             name = pizza.find_element_by_class_name('product__name').text.strip()
             ingridients = pizza.find_element_by_class_name(
-                'product__description.product__description_meta').text.strip().split(',')
-
+                'product__description.product__description_meta').text.strip()  # .split(',')
             prices = get_list_price(pizza)
-
-            pizza = {'image': image,
+            prices.sort()
+            prices = ','.join(prices)
+            pizzik.append({'image': image,
                      'name': name,
                      'ingridients': ingridients,
                      'prices': prices}
-            write_csv(pizza)
+                         )
+    del(pizzik[4])
+    return pizzik
+
+
+def insertInDatabase(yourDatabase, user, password, pizzas):
+    with closing(p2.connect(dbname="{}".format(yourDatabase), user="{}".format(user),
+                            password="{}".format(password), host="localhost")) as con:
+        with con.cursor() as cursor:
+            con.autocommit = True
+            cursor.executemany("INSERT INTO pizza(name, ingridients, price, image) VALUES "
+                               "(%(name)s, %(ingridients)s, %(prices)s, %(image)s)", pizzas)
 
 
 def main():
     driver = webdriver.Firefox(executable_path=r'C:\\Users\\ScRiB\\Desktop\\Firefox\\geckodriver.exe')
     url = "https://dodopizza.ru/voronezh#pizzas"
-    pizza(url, driver)
+    pizzas = pizza(url, driver)
     driver.quit()
+    insertInDatabase("JustForTest", "postgres", "odifus2312", pizzas)
 
 
 if __name__ == '__main__':
