@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "category_ingredient")
 public class CategoryIngredient {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,7 +23,7 @@ public class CategoryIngredient {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "ingredient", cascade = {CascadeType.DETACH, CascadeType.MERGE,
+    @OneToMany(mappedBy = "categoryIngredient", cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     List<Ingredient> ingredients;
 
@@ -33,7 +33,7 @@ public class CategoryIngredient {
     public CategoryIngredient(String name) {
         this.name = name;
     }
-    
+
     public void addIngredient(Ingredient ingredient){
         if(ingredients == null)
             ingredients = new ArrayList<>();

@@ -55,6 +55,7 @@ public class AppConfig implements WebMvcConfigurer {
         ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
         try {
             securityDataSource.setDriverClass(env.getProperty("jdbc.driver"));
+            logger.info(env.getProperty("jdbc.driver"));
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }

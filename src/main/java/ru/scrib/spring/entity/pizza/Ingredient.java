@@ -28,7 +28,7 @@ public class Ingredient {
     @JoinTable(
             name = "pizza_ingredient",
             joinColumns = @JoinColumn(name = "ingredient_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            inverseJoinColumns = @JoinColumn(name = "pizza_id")
     )
     private List<Pizza> pizzas;
 
