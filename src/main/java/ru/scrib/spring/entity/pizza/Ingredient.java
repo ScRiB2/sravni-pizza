@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,5 +32,22 @@ public class Ingredient {
     )
     private List<Pizza> pizzas;
 
-    private Cat
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "category_id")
+    private CategoryIngredient categoryIngredient;
+
+    public Ingredient() {
+    }
+
+    public Ingredient(String name) {
+        this.name = name;
+    }
+
+    public void addPizza(Pizza pizza) {
+        if (pizzas == null) {
+            pizzas = new ArrayList<>();
+        }
+        pizzas.add(pizza);
+    }
 }

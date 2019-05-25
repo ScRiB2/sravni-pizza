@@ -34,8 +34,8 @@ public class Company {
         this.name = name;
     }
 
-    public void addPizzza(Pizza tempPizza){
-        if(pizzas == null){
+    public void addPizzza(Pizza tempPizza) {
+        if (pizzas == null) {
             pizzas = new ArrayList<>();
         }
         pizzas.add(tempPizza);

@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -22,8 +24,8 @@ public class Pizza {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "ulrImage")
-    private String urlImage;
+    @Column(name = "image")
+    private String image;
 
     @Column(name = "price")
     private int price;
@@ -37,13 +39,34 @@ public class Pizza {
     @Enumerated(EnumType.STRING)
     private SizePizza sizePizza;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "pizza_ingredient",
-            joinColumns = @JoinColumn(name = "user_id"),
+            joinColumns = @JoinColumn(name = "pizza_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id")
     )
     private List<Ingredient> ingredients;
 
+    public Pizza() {
+    }
+
+    public Pizza(String name) {
+        this.name = name;
+    }
+
+    public Pizza(String name, String image, int price, Company company, SizePizza sizePizza) {
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.company = company;
+        this.sizePizza = sizePizza;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        if (ingredients == null) {
+            ingredients = new ArrayList<>();
+        }
+        ingredients.add(ingredient);
+    }
 }
