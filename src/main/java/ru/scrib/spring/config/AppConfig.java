@@ -2,6 +2,7 @@ package ru.scrib.spring.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,11 +19,11 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
-import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
-import java.util.Properties;
+import java.util.*;
 import java.util.logging.Logger;
 
 @Configuration
@@ -111,5 +112,6 @@ public class AppConfig implements WebMvcConfigurer {
 
         return txManager;
     }
+
 
 }
