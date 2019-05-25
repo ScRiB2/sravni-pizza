@@ -37,7 +37,7 @@ public class Pizza {
 
     @Column(name = "size")
     @Enumerated(EnumType.STRING)
-    private SizePizza sizePizza;
+    private SizePizza size;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
@@ -60,7 +60,14 @@ public class Pizza {
         this.image = image;
         this.price = price;
         this.company = company;
-        this.sizePizza = sizePizza;
+        this.size = sizePizza;
+    }
+
+    // для теста. Потом удалить
+    public Pizza(String name, String image, int price) {
+        this.name = name;
+        this.image = image;
+        this.price = price;
     }
 
     public void addIngredient(Ingredient ingredient) {

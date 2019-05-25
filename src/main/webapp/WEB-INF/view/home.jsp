@@ -31,5 +31,6 @@
     </p>
 </security:authorize>
 <hr>
+<a href="${pageContext.request.contextPath}/pizza/list">Работа с пиццей</a>
 </body>
 </html>
