@@ -17,12 +17,21 @@ public class PizzaDaoImpl implements PizzaDao{
     public List<Pizza> getPizzas() {
         Session currentSession = sessionFactory.getCurrentSession();
         Query<Pizza> theQuery = currentSession.createQuery("from Pizza order by name", Pizza.class);
-        List<Pizza> customers = theQuery.getResultList();
-        return customers;
+        List<Pizza> pizzas = theQuery.getResultList();
+        return pizzas;
     }
 
     public void savePizza(Pizza pizza) {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.saveOrUpdate(pizza);
+    }
+
+    @Override
+    public void deletePizza(long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query theQuery =
+                currentSession.createQuery("delete from Pizza  where id=:pizzaId");
+        theQuery.setParameter("pizzaId", id);
+        theQuery.executeUpdate();
     }
 }

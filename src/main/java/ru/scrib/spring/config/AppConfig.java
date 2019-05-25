@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
@@ -51,7 +52,7 @@ public class AppConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public DataSource securityDataSource(){
+    public DataSource securityDataSource() {
         ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
         try {
             securityDataSource.setDriverClass(env.getProperty("jdbc.driver"));
@@ -87,7 +88,7 @@ public class AppConfig implements WebMvcConfigurer {
 
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory(){
+    public LocalSessionFactoryBean sessionFactory() {
 
         // create session factorys
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -110,4 +111,5 @@ public class AppConfig implements WebMvcConfigurer {
 
         return txManager;
     }
+
 }

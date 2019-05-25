@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.scrib.spring.dao.RoleDAO;
 import ru.scrib.spring.dao.UserDAO;
+import ru.scrib.spring.dao.UserDaoImpl;
 import ru.scrib.spring.entity.user.Role;
 import ru.scrib.spring.entity.user.User;
 import ru.scrib.spring.user.CrmUser;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-    // need to inject user dao
+
     @Autowired
     private UserDAO userDao;
 

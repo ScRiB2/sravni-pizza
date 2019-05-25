@@ -22,5 +22,11 @@ public class PizzaServiceImpl implements PizzaService {
     @Transactional
     public void savePizza(Pizza pizza) {
         pizzaDao.savePizza(pizza);
+        pizza.getName();
+    }
+
+    @Transactional
+    public void deletePizza(long id) {
+        pizzaDao.deletePizza(id);
     }
 }

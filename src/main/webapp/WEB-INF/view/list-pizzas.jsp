@@ -1,16 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: ScRiB
-  Date: 28.04.2019
-  Time: 12:57
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"
+         isELIgnored="false"
+%>
 <html>
+
 <head>
     <title>List Customers</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
     <link type="text/css"
           rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/style.css"/>
@@ -43,14 +41,14 @@
                 <c:url var="updateLink" value="/customer/showFormForUpdate">
                     <c:param name="customerId" value="${tempPizza.id}"/>
                 </c:url>
-                <c:url var="deleteLink" value="/customer/delete">
+                <c:url var="deleteLink" value="/pizza/delete">
                     <c:param name="customerId" value="${tempPizza.id}"/>
                 </c:url>
                 <tr>
                     <td>${tempPizza.name}</td>
-                    <td>${tempPizza.image}</td>
+                    <td><img src="${tempPizza.image}"/></td>
                     <td>${tempPizza.price}</td>
-                    <td>${tempPizza.size}</td>
+                    <td>${tempPizza.size.name}</td>
                     <td>
                         <a href="${updateLink}">Update</a>
                         |

@@ -3,10 +3,7 @@ package ru.scrib.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.scrib.spring.entity.pizza.Pizza;
 import ru.scrib.spring.entity.pizza.SizePizza;
 import ru.scrib.spring.service.PizzaService;
@@ -19,6 +16,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/pizza")
 public class PizzaController {
+
     @Autowired
     private PizzaService pizzaService;
 
@@ -28,9 +26,9 @@ public class PizzaController {
     protected void loadSizes() {
         sizes = new LinkedHashMap<>();
 
-        sizes.put(SizePizza.BIG, "Big");
-        sizes.put(SizePizza.MEDIUM, "MEDIUM");
-        sizes.put(SizePizza.STANDART, "STANDART");
+        sizes.put(SizePizza.STANDART, "Обычная");
+        sizes.put(SizePizza.MEDIUM, "Средняя");
+        sizes.put(SizePizza.BIG, "Большая");
     }
 
     @GetMapping("/list")
@@ -51,6 +49,12 @@ public class PizzaController {
     @PostMapping("/savePizza")
     public String savePizza(@ModelAttribute("pizza") Pizza pizza) {
         pizzaService.savePizza(pizza);
+        return "redirect:/pizza/list";
+    }
+
+    @GetMapping("/delete")
+    public String deletePizza(@RequestParam("customerId") long id) {
+        pizzaService.deletePizza(id);
         return "redirect:/pizza/list";
     }
 }
