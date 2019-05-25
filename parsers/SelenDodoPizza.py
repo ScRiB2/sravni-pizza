@@ -65,6 +65,7 @@ def insertInDatabase(yourDatabase, user, password, pizzas):
 
 def main():
     driver = webdriver.Firefox(executable_path=r'C:\\Users\\ScRiB\\Desktop\\Firefox\\geckodriver.exe')
+    driver.maximize_window()
     url = "https://dodopizza.ru/voronezh#pizzas"
     pizzas = pizza(url, driver)
     driver.quit()

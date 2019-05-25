@@ -15,13 +15,18 @@ def write_csv(data):
 
 
 def get_list_price(pizza):
-    controls = pizza.find_element_by_class_name('goods-props-price-ctn')
-    sizes = controls.find_elements_by_class_name('pizza-size.goods-prop-value.js__goods-model-prop')
+
+    console = pizza.find_element_by_class_name('size-choose-block')
+    sizes = pizza.find_elements_by_class_name('size')
     prices = list()
+    print(len(sizes))
+    sizes[0].click()
     try:
-        for size in sizes:
+
+        for size in sizes[:3]:
             size.click()
-            prices.append(controls.find_element_by_class_name('price.goods-price').text)
+            #print(1)
+            prices.append(pizza.find_element_by_class_name("price.total-price").find_element_by_tag_name('span').text)
     except:
         prices.append(str(0))
     return prices
@@ -30,15 +35,16 @@ def get_list_price(pizza):
 def pizza(url, driver):
     driver.get(url)
     print("start")
-    pizzas_div = driver.find_element_by_class_name('goods-content.section-goods-content.js__goods-list-ctn')
-    pizza_container = pizzas_div.find_elements_by_class_name('goods-card.goods-card-mobile.js__goods-wrap')
-    print(pizza_container)
+    pizza_container = driver.find_element_by_class_name('items.holder').find_elements_by_class_name("item")
+    print(len(pizza_container))
     pizzik = []
-    for pizzas in pizza_container:
-        name = pizzas.find_element_by_class_name("goods-card-title").text[:-3]
-        image = pizzas.find_element_by_class_name("goods-card-img-cnt.js__goods-image.image-link").get_attribute("href")
-        ingridients = pizzas.find_element_by_class_name("goods-card-composition").text
+    for pizzas in pizza_container[:-2]:
+        name = pizzas.find_element_by_tag_name("img").get_attribute("title")
+        image = pizzas.find_element_by_tag_name("img").get_attribute("src")
+        pizzas.find_element_by_class_name("item-description-wrapper").click()
+        ingridients = pizzas.find_element_by_class_name("item-description").find_element_by_class_name("ingredients").text
         prices = get_list_price(pizzas)
+        print(name, image, ingridients, prices)
         pizzik.append(
             {
             'name': name,
@@ -47,9 +53,10 @@ def pizza(url, driver):
             'prices': ','.join(prices)
             }
         )
-    pizzik = pizzik[:-9]
-    del pizzik[-3]
     return pizzik
+
+
+
 def CreateDatabase(yourDatabase, user, password):
     with closing(p2.connect(dbname="{}".format(yourDatabase), user="{}".format(user),
                             password="{}".format(password), host="localhost")) as con:
@@ -77,11 +84,11 @@ def insertInDatabase(yourDatabase, user, password, pizzas):
 def main():
     driver = webdriver.Firefox(executable_path=r'C:\\Users\\ScRiB\\Desktop\\Firefox\\geckodriver.exe')
     driver.maximize_window()
-    url = "https://yummypizza.ru/sections/pitstsy"
+    url = "https://voronezh.pizzasushiwok.ru/pizza/"
     pizzas = pizza(url, driver)
     driver.quit()
-    CreateDatabase("JustForTest", "postgres", "odifus2312")
-    insertInDatabase("JustForTest", "postgres", "odifus2312", pizzas)
+    #CreateDatabase("JustForTest", "postgres", "odifus2312")
+    #insertInDatabase("JustForTest", "postgres", "odifus2312", pizzas)
 
 if __name__ == '__main__':
     main()
