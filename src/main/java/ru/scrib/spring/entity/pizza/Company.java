@@ -10,7 +10,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "company")
 public class Company {
@@ -23,8 +22,7 @@ public class Company {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "company", cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = CascadeType.ALL)
     private List<Pizza> pizzas;
 
     public Company() {
@@ -34,11 +32,19 @@ public class Company {
         this.name = name;
     }
 
-    public void addPizzza(Pizza tempPizza) {
+    public void addPizza(Pizza tempPizza) {
         if (pizzas == null) {
             pizzas = new ArrayList<>();
         }
         pizzas.add(tempPizza);
         tempPizza.setCompany(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

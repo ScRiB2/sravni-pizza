@@ -9,4 +9,6 @@ public interface PizzaDao {
     public void savePizza(Pizza pizza);
 
     void deletePizza(long id);
+
+    Pizza getPizza(long id);
 }

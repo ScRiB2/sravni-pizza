@@ -10,7 +10,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "category_ingredient")
 public class CategoryIngredient {
@@ -39,5 +38,13 @@ public class CategoryIngredient {
             ingredients = new ArrayList<>();
         ingredients.add(ingredient);
         ingredient.setCategoryIngredient(this);
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryIngredient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

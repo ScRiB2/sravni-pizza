@@ -10,7 +10,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "pizza")
 public class Pizza {
@@ -29,7 +28,7 @@ public class Pizza {
     @Column(name = "price")
     private int price;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "company_id")
     private Company company;
@@ -38,7 +37,7 @@ public class Pizza {
     @Enumerated(EnumType.STRING)
     private SizePizza size;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE,
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "pizza_ingredient",
@@ -62,17 +61,24 @@ public class Pizza {
         this.size = sizePizza;
     }
 
-    // для теста. Потом удалить
-    public Pizza(String name, String image, int price) {
-        this.name = name;
-        this.image = image;
-        this.price = price;
-    }
-
     public void addIngredient(Ingredient ingredient) {
         if (ingredients == null) {
             ingredients = new ArrayList<>();
         }
         ingredients.add(ingredient);
     }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", company=" + company +
+                ", size=" + size +
+                '}';
+    }
 }
+
+

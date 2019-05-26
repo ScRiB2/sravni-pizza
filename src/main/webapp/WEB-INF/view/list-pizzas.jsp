@@ -34,7 +34,7 @@
     <div id=content>
 
         <input type="button" value="Добавить пиццу"
-               onclick="window.location.href='showFormForAdd'; return false;"
+               onclick="window.location.href='addPizza'; return false;"
                class="add-button"
         />
 
@@ -49,11 +49,14 @@
 
             <c:forEach var="tempPizza" items="${pizzas}">
                 <!-- construct an update-->
-                <c:url var="updateLink" value="/p/showFormForUpdate">
-                    <c:param name="customerId" value="${tempPizza.id}"/>
+                <c:url var="updateLink" value="/pizza/update">
+                    <c:param name="pizzaId" value="${tempPizza.id}"/>
                 </c:url>
                 <c:url var="deleteLink" value="/pizza/delete">
-                    <c:param name="customerId" value="${tempPizza.id}"/>
+                    <c:param name="pizzaId" value="${tempPizza.id}"/>
+                </c:url>
+                <c:url var="infoLink" value="/pizza/info">
+                    <c:param name="pizzaId" value="${tempPizza.id}"/>
                 </c:url>
                 <tr>
                     <td>${tempPizza.name}</td>
@@ -65,6 +68,8 @@
                         |
                         <a href="${deleteLink}"
                            onclick="if (!(confirm('Вы точно хотите удалить эту пиццу?'))) return false">Удалить</a>
+                        |
+                        <a href="${infoLink}">Подробнее</a>
                     </td>
                 </tr>
             </c:forEach>

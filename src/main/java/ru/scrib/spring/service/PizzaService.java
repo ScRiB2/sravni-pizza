@@ -9,4 +9,6 @@ public interface PizzaService {
     public void savePizza(Pizza pizza);
 
     void deletePizza(long id);
+
+    Pizza getPizza(long id);
 }

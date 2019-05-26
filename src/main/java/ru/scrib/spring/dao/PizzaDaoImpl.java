@@ -34,4 +34,11 @@ public class PizzaDaoImpl implements PizzaDao{
         theQuery.setParameter("pizzaId", id);
         theQuery.executeUpdate();
     }
+
+    @Override
+    public Pizza getPizza(long id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Pizza pizza = currentSession.get(Pizza.class, id);
+        return pizza;
+    }
 }

@@ -9,9 +9,9 @@ import java.io.IOException;
 public class CharacterFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        servletRequest.setCharacterEncoding("UTF-8");
-        servletResponse.setContentType("text/html; charset=UTF-8");
-        servletResponse.setCharacterEncoding("UTF-8");
+        servletRequest.setCharacterEncoding("ISO-8859-1");
+        servletResponse.setContentType("text/html; charset=ISO-8859-1");
+        servletResponse.setCharacterEncoding("ISO-8859-1");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

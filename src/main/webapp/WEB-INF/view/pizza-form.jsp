@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
          isELIgnored="false"
@@ -7,7 +8,7 @@
 <html>
 <head>
     <title>Сохранить пиццу</title>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <link type="text/css"
           rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -27,7 +28,7 @@
 <div id="container">
     <h3>Сохранить пиццу</h3>
 
-    <form:form action="savePizza" modelAttribute="pizza" method="post">
+    <form:form action="savePizza" modelAttribute="pizza"  method="post">
         <form:hidden path="id"/>
 
         <table>
@@ -46,7 +47,16 @@
             </tr>
             <tr>
                 <td><label>Размер:</label></td>
-                <td><form:select path="size" items="${sizes}" /></td>
+                <td><form:select path="size" items="${sizes}"/></td>
+            </tr>
+            <tr>
+                <td><label>Компания:</label></td>
+                <td><form:select path="company">
+                    <form:options items="${companies}" itemValue="id" itemLabel="name"/>
+                </form:select>
+                    <a href="${pageContext.request.contextPath}/company/add">Добавить</a>
+                </td>
+
             </tr>
             <tr>
                 <td><label></label></td>

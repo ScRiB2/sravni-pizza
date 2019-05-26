@@ -4,16 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.scrib.spring.entity.pizza.Company;
 import ru.scrib.spring.entity.pizza.Pizza;
 import ru.scrib.spring.entity.pizza.SizePizza;
+import ru.scrib.spring.service.CompanyService;
 import ru.scrib.spring.service.PizzaService;
 import ru.scrib.spring.string.StringHelper;
 
 import javax.annotation.PostConstruct;
-import java.io.InputStreamReader;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/pizza")
@@ -22,19 +21,11 @@ public class PizzaController {
     @Autowired
     private PizzaService pizzaService;
 
+    @Autowired
+    private CompanyService companyService;
+
     private Map<SizePizza, String> sizes;
-
-    // convert from UTF-8 -> internal Java String format
-    public static String convertFromUTF8(String s) {
-        String out = null;
-        try {
-            out = new String(s.getBytes("ISO-8859-1"), "UTF-8");
-        } catch (java.io.UnsupportedEncodingException e) {
-            return null;
-        }
-        return out;
-    }
-
+    private List<Company> companies;
 
     @PostConstruct
     protected void loadSizes() {
@@ -43,6 +34,7 @@ public class PizzaController {
         sizes.put(SizePizza.STANDART, "Обычная");
         sizes.put(SizePizza.MEDIUM, "Средняя");
         sizes.put(SizePizza.BIG, "Большая");
+
     }
 
     @GetMapping("/list")
@@ -52,24 +44,44 @@ public class PizzaController {
         return "list-pizzas";
     }
 
-    @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model model) {
+    @GetMapping("/addPizza")
+    public String addPizza(Model model) {
         Pizza pizza = new Pizza();
+        companies = companyService.getCompanies();
         model.addAttribute("pizza", pizza);
         model.addAttribute("sizes", sizes);
+        model.addAttribute("companies", companies);
         return "pizza-form";
     }
 
     @PostMapping("/savePizza")
     public String savePizza(@ModelAttribute("pizza") Pizza pizza) {
-        pizza.setName(StringHelper.convertFromUTF8(pizza.getName()));
         pizzaService.savePizza(pizza);
         return "redirect:/pizza/list";
     }
 
     @GetMapping("/delete")
-    public String deletePizza(@RequestParam("customerId") long id) {
+    public String deletePizza(@RequestParam("pizzaId") long id) {
         pizzaService.deletePizza(id);
         return "redirect:/pizza/list";
+    }
+
+    @GetMapping("/update")
+    public String updatePizza(@RequestParam("pizzaId") long id,
+                              Model model) {
+        Pizza pizza = pizzaService.getPizza(id);
+        companies = companyService.getCompanies();
+        model.addAttribute("pizza", pizza);
+        model.addAttribute("sizes", sizes);
+        model.addAttribute("companies", companies);
+        return "pizza-form";
+    }
+
+    @GetMapping("/info")
+    public String infoPizza(@RequestParam("pizzaId") long id,
+                            Model model) {
+        Pizza pizza = pizzaService.getPizza(id);
+        model.addAttribute("pizza", pizza);
+        return "pizza-info";
     }
 }
