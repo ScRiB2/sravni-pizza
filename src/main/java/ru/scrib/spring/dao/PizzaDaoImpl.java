@@ -23,6 +23,7 @@ public class PizzaDaoImpl implements PizzaDao{
 
     public void savePizza(Pizza pizza) {
         Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.clear();
         currentSession.saveOrUpdate(pizza);
     }
 
@@ -41,4 +42,5 @@ public class PizzaDaoImpl implements PizzaDao{
         Pizza pizza = currentSession.get(Pizza.class, id);
         return pizza;
     }
+
 }

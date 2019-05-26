@@ -20,12 +20,12 @@
 
 <div id="wrapper">
     <div id="header">
-        <h2>Список пицц</h2>
+        <h2>Список компаний</h2>
     </div>
 </div>
 
 <div id="container">
-    <h3>Сохранить пиццу</h3>
+    <h3>Сохранить компанию</h3>
 
     <form:form action="save" modelAttribute="company" method="post">
         <form:hidden path="id"/>
@@ -45,7 +45,7 @@
     </form:form>
     <div style="clear; both;"></div>
     <p>
-        <a href="${pageContext.request.contextPath}/pizza/list">Вернуться в список пицц</a>
+        <a href="${pageContext.request.contextPath}/pizza/list">Вернуться в список компаний</a>
     </p>
 
 </div>

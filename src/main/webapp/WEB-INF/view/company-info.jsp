@@ -5,43 +5,33 @@
          isELIgnored="false"
 %>
 <html>
-
 <head>
-    <title>Список пицц</title>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <title>Информация о компании</title>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <link type="text/css"
           rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/style.css"/>
     <style>
-        .img{
-            width:100px;
-            height:100px;
+        .img {
+            width: 100px;
+            height: 100px;
         }
 
-        .image-pizza{
-            max-width:100%;
+        .image-pizza {
+            max-width: 100%;
             max-height: 100%;
         }
     </style>
 </head>
 <body>
+
 <div id="wrapper">
     <div id="header">
-        <h2>Список пицц</h2>
+        <h2>Информация о компании ${company.name}</h2>
     </div>
 </div>
 <div id="container">
     <div id=content>
-
-        <input type="button" value="Добавить пиццу"
-               onclick="window.location.href='addPizza'; return false;"
-               class="add-button"
-        />
-        <input type="button" value="Список компаний"
-               onclick="window.location.href='/company/list'; return false;"
-               class="add-button"
-        />
-
         <table>
             <tr>
                 <th>Название</th>
@@ -53,8 +43,9 @@
 
             <c:forEach var="tempPizza" items="${pizzas}">
                 <!-- construct an update-->
-                <c:url var="updateLink" value="/pizza/update">
+                <c:url var="updateLink" value="/pizza/updateWithCompany">
                     <c:param name="pizzaId" value="${tempPizza.id}"/>
+                    <c:param name="companyId" value="${company.id}"/>
                 </c:url>
                 <c:url var="deleteLink" value="/pizza/delete">
                     <c:param name="pizzaId" value="${tempPizza.id}"/>
@@ -79,6 +70,10 @@
             </c:forEach>
         </table>
     </div>
+
+    <p>
+        <a href="${pageContext.request.contextPath}/company/list">Вернуться в список</a>
+    </p>
 </div>
 
 

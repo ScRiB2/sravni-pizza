@@ -5,9 +5,8 @@
          isELIgnored="false"
 %>
 <html>
-
 <head>
-    <title>Список пицц</title>
+    <title>Список компаний</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
     <link type="text/css"
           rel="stylesheet"
@@ -27,51 +26,48 @@
 <body>
 <div id="wrapper">
     <div id="header">
-        <h2>Список пицц</h2>
+        <h2>Список компаний</h2>
     </div>
 </div>
 <div id="container">
     <div id=content>
 
-        <input type="button" value="Добавить пиццу"
-               onclick="window.location.href='addPizza'; return false;"
+        <input type="button" value="Добавить компанию"
+               onclick="window.location.href='add'; return false;"
                class="add-button"
         />
-        <input type="button" value="Список компаний"
-               onclick="window.location.href='/company/list'; return false;"
+
+        <input type="button" value="Список пицц"
+               onclick="window.location.href='/pizza/list'; return false;"
                class="add-button"
         />
 
         <table>
             <tr>
                 <th>Название</th>
-                <th>Изображение</th>
-                <th>Цена</th>
-                <th>Размер</th>
+                <th>Количество пицц</th>
                 <th>Действия</th>
             </tr>
 
-            <c:forEach var="tempPizza" items="${pizzas}">
+            <c:forEach var="company" items="${company}">
                 <!-- construct an update-->
-                <c:url var="updateLink" value="/pizza/update">
-                    <c:param name="pizzaId" value="${tempPizza.id}"/>
+                <c:url var="updateLink" value="/company/update">
+                    <c:param name="companyId" value="${company.id}"/>
                 </c:url>
-                <c:url var="deleteLink" value="/pizza/delete">
-                    <c:param name="pizzaId" value="${tempPizza.id}"/>
+                <c:url var="deleteLink" value="/company/delete">
+                    <c:param name="companyId" value="${company.id}"/>
                 </c:url>
-                <c:url var="infoLink" value="/pizza/info">
-                    <c:param name="pizzaId" value="${tempPizza.id}"/>
+                <c:url var="infoLink" value="/company/info">
+                    <c:param name="companyId" value="${company.id}"/>
                 </c:url>
                 <tr>
-                    <td>${tempPizza.name}</td>
-                    <td class="img"><img src="${tempPizza.image}" class="image-pizza"/></td>
-                    <td>${tempPizza.price}</td>
-                    <td>${tempPizza.size.name}</td>
+                    <td>${company.name}</td>
+                    <td>${company.pizzas.size()}</td>
                     <td>
                         <a href="${updateLink}">Обновить</a>
                         |
                         <a href="${deleteLink}"
-                           onclick="if (!(confirm('Вы точно хотите удалить эту пиццу?'))) return false">Удалить</a>
+                           onclick="if (!(confirm('Вы точно хотите удалить эту компанию?'))) return false">Удалить</a>
                         |
                         <a href="${infoLink}">Подробнее</a>
                     </td>

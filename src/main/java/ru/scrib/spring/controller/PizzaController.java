@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ru.scrib.spring.entity.pizza.Company;
 import ru.scrib.spring.entity.pizza.Pizza;
 import ru.scrib.spring.entity.pizza.SizePizza;
@@ -70,6 +71,18 @@ public class PizzaController {
     public String updatePizza(@RequestParam("pizzaId") long id,
                               Model model) {
         Pizza pizza = pizzaService.getPizza(id);
+        companies = companyService.getCompanies();
+        model.addAttribute("pizza", pizza);
+        model.addAttribute("sizes", sizes);
+        model.addAttribute("companies", companies);
+        return "pizza-form";
+    }
+
+    @GetMapping("/updateWithCompany")
+    public String updatePizzaWithCompany(@RequestParam("pizzaId") long pizzaId,
+                                         @RequestParam("companyId") long companyId,
+                                         Model model) {
+        Pizza pizza = pizzaService.getPizza(pizzaId);
         companies = companyService.getCompanies();
         model.addAttribute("pizza", pizza);
         model.addAttribute("sizes", sizes);
