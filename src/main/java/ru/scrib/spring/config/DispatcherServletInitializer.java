@@ -20,7 +20,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
         return new String[]{"/"};
     }
 
-    @Override
+    /*@Override
     protected Filter[] getServletFilters() {
         DelegatingFilterProxy filterProxy = new DelegatingFilterProxy();
         filterProxy.setTargetBeanName("myTestFilter");
@@ -35,5 +35,5 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
         charEncodingFilterReg.setInitParameter("forceEncoding", "true");
         charEncodingFilterReg.addMappingForUrlPatterns(null, false, "/*");
         super.onStartup(container);
-    }
+    }*/
 }

@@ -45,3 +45,8 @@ tr:nth-child(odd) {background: #BBBBBB}
 	margin-bottom: 15px;
 	background: #cccccc;
 }
+
+.image-pizza{
+	max-width:100%;
+
+}

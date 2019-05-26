@@ -90,11 +90,8 @@ public class AppConfig implements WebMvcConfigurer {
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
-
-        // create session factorys
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 
-        // set the properties
         sessionFactory.setDataSource(securityDataSource());
         sessionFactory.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
         sessionFactory.setHibernateProperties(getHibernateProperties());

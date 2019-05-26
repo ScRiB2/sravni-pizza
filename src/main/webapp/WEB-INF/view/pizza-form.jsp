@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Save Customer</title>
+    <title>Сохранить пиццу</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
     <link type="text/css"
           rel="stylesheet"
@@ -20,12 +20,12 @@
 
 <div id="wrapper">
     <div id="header">
-        <h2>List of Pizza</h2>
+        <h2>Список пицц</h2>
     </div>
 </div>
 
 <div id="container">
-    <h3>Save Pizza</h3>
+    <h3>Сохранить пиццу</h3>
 
     <form:form action="savePizza" modelAttribute="pizza" method="post">
         <form:hidden path="id"/>
@@ -33,31 +33,31 @@
         <table>
             <tbody>
             <tr>
-                <td><label>Name:</label></td>
+                <td><label>Название:</label></td>
                 <td><form:input path="name"/></td>
             </tr>
             <tr>
-                <td><label>Image:</label></td>
+                <td><label>Изображение:</label></td>
                 <td><form:input path="image"/></td>
             </tr>
             <tr>
-                <td><label>Price:</label></td>
+                <td><label>Цена:</label></td>
                 <td><form:input path="price"/></td>
             </tr>
             <tr>
-                <td><label>Size:</label></td>
+                <td><label>Размер:</label></td>
                 <td><form:select path="size" items="${sizes}" /></td>
             </tr>
             <tr>
                 <td><label></label></td>
-                <td><input type="submit" value="Save" class="save"/></td>
+                <td><input type="submit" value="Сохранить" class="save"/></td>
             </tr>
             </tbody>
         </table>
     </form:form>
     <div style="clear; both;"></div>
     <p>
-        <a href="${pageContext.request.contextPath}/pizza/list">Back to List</a>
+        <a href="${pageContext.request.contextPath}/pizza/list">Вернуться в список</a>
     </p>
 
 </div>
