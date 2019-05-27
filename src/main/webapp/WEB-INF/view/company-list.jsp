@@ -46,6 +46,7 @@
             <tr>
                 <th>Название</th>
                 <th>Количество пицц</th>
+                <th>Ссылка</th>
                 <th>Действия</th>
             </tr>
 
@@ -63,6 +64,7 @@
                 <tr>
                     <td>${company.name}</td>
                     <td>${company.pizzas.size()}</td>
+                    <td>${company.url}</td>
                     <td>
                         <a href="${updateLink}">Обновить</a>
                         |

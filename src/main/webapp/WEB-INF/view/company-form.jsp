@@ -37,6 +37,10 @@
                 <td><form:input path="name"/></td>
             </tr>
             <tr>
+                <td><label>Ссылка:</label></td>
+                <td><form:input path="url"/></td>
+            </tr>
+            <tr>
                 <td><label></label></td>
                 <td><input type="submit" value="Сохранить" class="save"/></td>
             </tr>

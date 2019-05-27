@@ -22,6 +22,9 @@ public class Company {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "url")
+    private String url;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Pizza> pizzas;

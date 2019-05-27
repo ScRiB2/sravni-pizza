@@ -22,7 +22,7 @@ public class Ingredient {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "pizza_ingredient",
