@@ -6,6 +6,7 @@ import ru.scrib.spring.dao.CompanyDao;
 import ru.scrib.spring.dao.PizzaDao;
 import ru.scrib.spring.entity.pizza.Company;
 import ru.scrib.spring.entity.pizza.Pizza;
+import ru.scrib.spring.filters.Filters;
 import ru.scrib.spring.string.StringHelper;
 
 import javax.transaction.Transactional;
@@ -42,5 +43,20 @@ public class PizzaServiceImpl implements PizzaService {
     @Transactional
     public Pizza getPizza(long id) {
         return pizzaDao.getPizza(id);
+    }
+
+    @Transactional
+    public int getMinPrice() {
+        return pizzaDao.getMinPrice();
+    }
+
+    @Transactional
+    public int getMaxPrice() {
+        return pizzaDao.getMaxPrice();
+    }
+
+    @Transactional
+    public List<Pizza> getPizzasWithFilters(Filters filters) {
+        return pizzaDao.getPizzasWithFilters(filters);
     }
 }

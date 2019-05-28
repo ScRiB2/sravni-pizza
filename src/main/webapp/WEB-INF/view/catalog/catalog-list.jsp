@@ -36,11 +36,11 @@
             </div>
             <div class="col-md-4">
                 <h4>Фильтр по ценам</h4>
-                <div id="prices-label">${filters.minPrice} - ${filters.maxPrice} руб.</div>
-                <br/>
-                <form:input path="minPrice" id="min-price" name="min_price" value="${filters.minPrice}"/>
-                <form:input path="maxPrice" id="max-price" name="max_price" value="${filters.maxPrice}"/>
-                <div id="prices"></div>
+                <div id="prices-label">
+                Минимальная цена: <form:input path="minPrice" id="min-price" name="min_price" value="${filters.minPrice}"/>
+                Максимальная цена: <form:input path="maxPrice" id="max-price" name="max_price" value="${filters.maxPrice}"/>
+                </div>
+                    <div id="prices"></div>
             </div>
             <div class="col-md-4">
                 <h4>Сортировка</h4>
@@ -48,8 +48,8 @@
                 <form:select path="sort" id="sort" name="sort" class="form-control">
                     <form:option value="0">Cначала дешевые</form:option>
                     <form:option value="1">Cначала дорогие</form:option>
-                    <form:option value="2">По названию, A-Z</form:option>
-                    <form:option value="3">По названию, Z-A</form:option>
+                    <form:option value="2">По названию, А-Я</form:option>
+                    <form:option value="3">По названию, Я-А</form:option>
                 </form:select>
                 <input type="submit" value="Подтвердить"
                        class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
