@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"
          isELIgnored="false"
@@ -17,55 +18,84 @@
 <body data-page="catalogDB">
 <div class="container">
     <br/>
+    <h1 class="text-center"><big><strong>Сравнить пиццы</strong></big></h1>
     <br/>
-    <br/>
-    <br/>
-    <div id="filters" class="col-md-12">
-        <br/>
-        <br/>
-        <form:form action="list" modelAttribute="filters" id="filters-form" role="form" method="post">
-            <div class="col-md-4">
-                <h4>Бренды</h4>
-                <div id="brands">
-                    <c:forEach var="company" items="${companies}">
-                        <div class="checkbox"><label><form:checkbox path="companiesName"
-                                                                    value="${company.name}"/> ${company.name}</label>
-                        </div>
-                    </c:forEach>
+    <blockquote class="pull-right">
+        <h5>Жизнь - это в основном боль и борьба. В остальном - это любовь и пицца...</h5>
+        <small><i>Бенедикт Смит</i></small>
+    </blockquote>
+    <form:form action="list" modelAttribute="filters" id="filters-form" role="form" method="post">
+        <div class="row">
+            <ul class="list-inline">
+                <li>Главная</li>
+                <li>Портфолио</li>
+                <li>Автор</li>
+                <security:authorize access="isAnonymous()">
+                    <input type="submit" value="Войти"
+                           onclick="window.location.href='/login'; return false;"
+                           class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
+                    />
+                </security:authorize>
+                <security:authorize access="isAuthenticated()">
+                    <input type="submit" value="Выйти"
+                           onclick="window.location.href='<c:url value="/logout" />'; return false;"
+                           class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
+                    />
+                </security:authorize>
+
+            </ul>
+            <div class="col-md-3 col-md-offset-9">
+                <div class="form-group">
+                    <form:select path="sort" id="sort" name="sort" class="form-control">
+                        <form:option value="0">Cначала дешевые</form:option>
+                        <form:option value="1">Cначала дорогие</form:option>
+                        <form:option value="2">По названию, А-Я</form:option>
+                        <form:option value="3">По названию, Я-А</form:option>
+                    </form:select>
                 </div>
             </div>
-            <div class="col-md-4">
-                <h4>Фильтр по ценам</h4>
-                <div id="prices-label">
-                Минимальная цена: <form:input path="minPrice" id="min-price" name="min_price" value="${filters.minPrice}"/>
-                Максимальная цена: <form:input path="maxPrice" id="max-price" name="max_price" value="${filters.maxPrice}"/>
+        </div>
+        <div id="filters" class="col-md-4">
+            <div class="row">
+                <div>
+                    <h4>Компании</h4>
+                    <div id="brands">
+                        <c:forEach var="company" items="${companies}">
+                            <div class="form-check"><label><form:checkbox path="companiesName"
+                                                                          value="${company.name}"/> ${company.name}</label>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
-                    <div id="prices"></div>
             </div>
-            <div class="col-md-4">
-                <h4>Сортировка</h4>
-                <br/>
-                <form:select path="sort" id="sort" name="sort" class="form-control">
-                    <form:option value="0">Cначала дешевые</form:option>
-                    <form:option value="1">Cначала дорогие</form:option>
-                    <form:option value="2">По названию, А-Я</form:option>
-                    <form:option value="3">По названию, Я-А</form:option>
-                </form:select>
-                <input type="submit" value="Подтвердить"
-                       class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
-                />
+            <div class="row">
+                <div>
+                    <h4>Цена</h4>
+                    <div id="prices-label">
+                        Минимальная: <form:input path="minPrice" id="min-price" name="min_price"
+                                                 value="${filters.minPrice}"/>
+                        Максимальная: <form:input path="maxPrice" id="max-price" name="max_price"
+                                                  value="${filters.maxPrice}"/>
+                    </div>
+                </div>
             </div>
-        </form:form>
-    </div>
+            <br/>
+            <div class="row"><input type="submit" value="Подтвердить"
+                                    class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
+            />
+            </div>
+
+        </div>
+    </form:form>
     <br/>
     <br/>
-    <ul id="goods" class="col-md-12">
+    <ul id="goods" class="col-md-8">
         <c:forEach var="tempPizza" items="${pizzas}">
             <li class="small-good-item row">
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <img class="small-good-item__img" src="${tempPizza.image}"/>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-4">
                     <div class="small-good-item__name">${tempPizza.name} </div>
                     <div class="small-good-item__id">Ингридиенты: ${tempPizza.ingredients.size()} </div>
                     <div class="small-good-item__brand">Фирма: ${tempPizza.company.name}</div>

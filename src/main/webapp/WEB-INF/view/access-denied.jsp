@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Доступ запрещён</title>
+    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <p>Не хватает прав доступа</p>

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class ComanyDaoImpl implements CompanyDao {
+public class CompanyDaoImpl implements CompanyDao {
     @Autowired
     private SessionFactory sessionFactory;
 

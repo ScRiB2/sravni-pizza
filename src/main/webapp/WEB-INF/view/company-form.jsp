@@ -8,6 +8,7 @@
 <head>
     <title>Сохранить компанию</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link type="text/css"
           rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/style.css">
@@ -53,6 +54,5 @@
     </p>
 
 </div>
-
 </body>
 </html>
