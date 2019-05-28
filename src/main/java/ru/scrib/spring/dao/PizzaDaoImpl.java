@@ -88,7 +88,6 @@ public class PizzaDaoImpl implements PizzaDao {
         }
         criteria.add(Restrictions.between("price", filters.getMinPrice(), filters.getMaxPrice()));
         criteria.add(Restrictions.in("company", filters.getCompanyList()));
-        //criteria.add(Restrictions.allEq())
         return criteria.list();
     }
 }

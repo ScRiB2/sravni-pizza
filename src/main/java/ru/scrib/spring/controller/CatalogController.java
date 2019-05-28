@@ -35,10 +35,6 @@ public class CatalogController {
     @PostMapping("/list")
     public String activateFilter(@ModelAttribute("filters") Filters filters,
                                  Model model) {
-        System.out.println("Список компаний");
-        for(String str: filters.getCompaniesName()){
-                        System.out.println(str);
-        }
         model.addAttribute("pizzas",pizzaService.getPizzasWithFilters(filters));
         model.addAttribute("filters", filters);
         model.addAttribute("companies", companyService.getCompanies());
