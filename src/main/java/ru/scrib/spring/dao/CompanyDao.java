@@ -9,4 +9,6 @@ public interface CompanyDao {
     public void saveCompany(Company company);
     void deleteCompany(long id);
     Company getCompany(long id);
+
+    List<Company> getCompaniesByName(String[] companiesName);
 }

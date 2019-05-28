@@ -28,7 +28,7 @@
                 <h4>Бренды</h4>
                 <div id="brands">
                     <c:forEach var="company" items="${companies}">
-                        <div class="checkbox"><label><form:checkbox path="companies"
+                        <div class="checkbox"><label><form:checkbox path="companiesName"
                                                                     value="${company.name}"/> ${company.name}</label>
                         </div>
                     </c:forEach>

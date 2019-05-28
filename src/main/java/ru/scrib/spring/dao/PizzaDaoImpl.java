@@ -56,7 +56,6 @@ public class PizzaDaoImpl implements PizzaDao {
         Query<Integer> query = currentSession
                 .createSQLQuery("select min(price) as p from Pizza")
                 .addScalar("p", IntegerType.INSTANCE);
-        System.out.println(query.getSingleResult());
         return query.getSingleResult();
     }
 
@@ -66,7 +65,6 @@ public class PizzaDaoImpl implements PizzaDao {
         Query<Integer> query = currentSession
                 .createSQLQuery("select max(price) as p from Pizza")
                 .addScalar("p", IntegerType.INSTANCE);
-        System.out.println(query.getSingleResult());
         return query.getSingleResult();
     }
 
@@ -89,6 +87,8 @@ public class PizzaDaoImpl implements PizzaDao {
                 break;
         }
         criteria.add(Restrictions.between("price", filters.getMinPrice(), filters.getMaxPrice()));
+        criteria.add(Restrictions.in("company", filters.getCompanyList()));
+        //criteria.add(Restrictions.allEq())
         return criteria.list();
     }
 }

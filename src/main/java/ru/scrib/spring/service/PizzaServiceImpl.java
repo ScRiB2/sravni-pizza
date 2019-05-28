@@ -57,6 +57,12 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Transactional
     public List<Pizza> getPizzasWithFilters(Filters filters) {
-        return pizzaDao.getPizzasWithFilters(filters);
+        List<Company> companies = companyDao.getCompaniesByName(filters.getCompaniesName());
+        filters.setCompanyList(companies);
+        List<Pizza> pizzas = pizzaDao.getPizzasWithFilters(filters);
+        for (Pizza pizza : pizzas) {
+            pizza.getIngredients().size();
+        }
+        return pizzas;
     }
 }

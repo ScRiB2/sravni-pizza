@@ -8,9 +8,6 @@ import ru.scrib.spring.filters.Filters;
 import ru.scrib.spring.service.CompanyService;
 import ru.scrib.spring.service.PizzaService;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 
 @Controller
 @RequestMapping("/catalog")
@@ -38,6 +35,10 @@ public class CatalogController {
     @PostMapping("/list")
     public String activateFilter(@ModelAttribute("filters") Filters filters,
                                  Model model) {
+        System.out.println("Список компаний");
+        for(String str: filters.getCompaniesName()){
+                        System.out.println(str);
+        }
         model.addAttribute("pizzas",pizzaService.getPizzasWithFilters(filters));
         model.addAttribute("filters", filters);
         model.addAttribute("companies", companyService.getCompanies());

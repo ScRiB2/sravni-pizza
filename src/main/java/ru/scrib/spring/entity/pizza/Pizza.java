@@ -37,7 +37,7 @@ public class Pizza {
     @Enumerated(EnumType.STRING)
     private SizePizza size;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE,
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "pizza_ingredient",
