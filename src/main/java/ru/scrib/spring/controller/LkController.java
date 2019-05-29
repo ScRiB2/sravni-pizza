@@ -9,10 +9,5 @@ public class LkController {
     public String showLkPage(){
         return "lk";
     }
-
-    @GetMapping("/admin")
-    public String showAdminPage(){
-        return "admin";
-    }
 }
 

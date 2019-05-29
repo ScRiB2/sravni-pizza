@@ -46,7 +46,7 @@
     </form:form>
     <div style="clear; both;"></div>
     <p>
-        <a href="${pageContext.request.contextPath}/category/list">Вернуться в список компаний</a>
+        <a href="${pageContext.request.contextPath}/category/list">Вернуться в список</a>
     </p>
 
 </div>

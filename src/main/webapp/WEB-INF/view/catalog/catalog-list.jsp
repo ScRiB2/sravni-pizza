@@ -24,12 +24,21 @@
         <h5>Жизнь - это в основном боль и борьба. В остальном - это любовь и пицца...</h5>
         <small><i>Бенедикт Смит</i></small>
     </blockquote>
-    <form:form action="list" modelAttribute="filters" id="filters-form" role="form" method="post">
+    <form:form action="" modelAttribute="filters" id="filters-form" role="form" method="post">
         <div class="row">
             <ul class="list-inline">
-                <li>Главная</li>
-                <li>Портфолио</li>
-                <li>Автор</li>
+                <security:authorize access="hasRole('USER')">
+                    <input type="submit" value="Личный кабинет"
+                           onclick="window.location.href='/lk'; return false;"
+                           class="small-good-item__btn-add btn btn-primary btn-sm"
+                    />
+                </security:authorize>
+                <security:authorize access="hasRole('ADMIN')">
+                    <input type="submit" value="Админка"
+                           onclick="window.location.href='/pizza/list'; return false;"
+                           class="small-good-item__btn-add btn btn-danger btn-sm"
+                    />
+                </security:authorize>
                 <security:authorize access="isAnonymous()">
                     <input type="submit" value="Войти"
                            onclick="window.location.href='/login'; return false;"

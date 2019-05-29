@@ -33,19 +33,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/register/**", "/processRegistrationForm", "/pizza/**", "/company/**",
-                        "/catalog/**", "/categories/**", "/ingredients/**")
+                        "/**", "/categories/**", "/ingredients/**")
                 .permitAll();
 
         http.formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticateTheUser")
-                .defaultSuccessUrl("/catalog/list")
+                .defaultSuccessUrl("/")
                 .successHandler(customAuthenticationSuccessHandler)
                 .permitAll();
 
         http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/catalog/list")
+                .logoutSuccessUrl("/")
                 .permitAll();
 
         http.authorizeRequests()

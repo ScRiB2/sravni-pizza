@@ -50,7 +50,7 @@
                class="add-button"
         />
         <input style="margin-left: 30%" type="button" value="На главную"
-               onclick="window.location.href='/catalog/list'; return false;"
+               onclick="window.location.href='/'; return false;"
                class="add-button text-right"
         />
         <table>
