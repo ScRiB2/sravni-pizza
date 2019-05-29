@@ -31,25 +31,25 @@
             </security:authorize>
             <ul class="list-inline">
                 <security:authorize access="hasRole('USER')">
-                    <input type="submit" value="Личный кабинет"
+                    <input type="button" value="Личный кабинет"
                            onclick="window.location.href='/lk'; return false;"
                            class="small-good-item__btn-add btn btn-primary btn-sm"
                     />
                 </security:authorize>
 
-                <input type="submit" value="Админка"
+                <input type="button" value="Админка"
                        onclick="window.location.href='/pizza/list'; return false;"
                        class="small-good-item__btn-add btn btn-danger btn-sm"
                 />
 
                 <security:authorize access="isAnonymous()">
-                    <input type="submit" value="Войти"
+                    <input type="button" value="Войти"
                            onclick="window.location.href='/login'; return false;"
                            class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
                     />
                 </security:authorize>
                 <security:authorize access="isAuthenticated()">
-                    <input type="submit" value="Выйти"
+                    <input type="button" value="Выйти"
                            onclick="window.location.href='<c:url value="/logout"/>'; return false;"
                            class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
                     />
@@ -119,6 +119,10 @@
             <div class="row"><input type="submit" value="Подтвердить"
                                     class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
             />
+                <input type="button" value="Сбросить"
+                       onclick="window.location.href='/'; return false;"
+                       class="small-good-item__btn-add btn btn-danger btn-sm"
+                />
             </div>
 
         </div>
