@@ -40,4 +40,17 @@ public class CategoryIngredientDaoImpl implements CategoryIngredientDao {
     public CategoryIngredient getCategory(long id) {
         return sessionFactory.getCurrentSession().get(CategoryIngredient.class, id);
     }
+
+    @Override
+    public List<CategoryIngredient> getCategoriesByName(String[] categoryName) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<CategoryIngredient> query;
+        if(categoryName == null || categoryName.length == 0)
+            query = currentSession.createQuery("from CategoryIngredient");
+        else {
+            query = currentSession.createQuery("from CategoryIngredient where name in (:n) ");
+            query.setParameterList("n", categoryName);
+        }
+        return query.getResultList();
+    }
 }

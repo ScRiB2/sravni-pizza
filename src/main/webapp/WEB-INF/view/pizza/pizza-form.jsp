@@ -12,7 +12,6 @@
     <link type="text/css"
           rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/style.css">
-
     <link type="text/css"
           rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
@@ -28,7 +27,7 @@
 <div id="container">
     <h3>Сохранить пиццу</h3>
 
-    <form:form action="savePizza" modelAttribute="pizza"  method="post">
+    <form:form action="savePizza" modelAttribute="pizza" method="post">
         <form:hidden path="id"/>
 
         <table>
@@ -59,7 +58,15 @@
                            class="add-button"
                     />
                 </td>
-
+            </tr>
+            <tr>
+                <td><label>Ингредиенты:</label></td>
+                <td><c:forEach var="ingredient" items="${pizza.ingredients}">
+                    <form:hidden path="ingredients"/>
+                    <p>${ingredient.name}</p>
+                </c:forEach>
+                    <input type="button" value="Изменить" onclick="window.location.href='addIngredient'"
+                           class="add-button"/></td>
             </tr>
             <tr>
                 <td><label></label></td>
@@ -74,6 +81,5 @@
     </p>
 
 </div>
-
 </body>
 </html>

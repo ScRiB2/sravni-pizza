@@ -9,4 +9,5 @@ public interface CategoryIngredientDao {
     void saveCategory(CategoryIngredient categoryIngredient);
     void deleteCategory(long id);
     CategoryIngredient getCategory(long id);
+    List<CategoryIngredient> getCategoriesByName(String[] categoryName);
 }

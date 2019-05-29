@@ -9,11 +9,13 @@ import org.hibernate.query.Query;
 import org.hibernate.type.IntegerType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ru.scrib.spring.entity.pizza.CategoryIngredient;
+import ru.scrib.spring.entity.pizza.Ingredient;
 import ru.scrib.spring.entity.pizza.Pizza;
+import ru.scrib.spring.entity.pizza.SizePizza;
 import ru.scrib.spring.filters.Filters;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
@@ -71,23 +73,27 @@ public class PizzaDaoImpl implements PizzaDao {
     @Override
     public List<Pizza> getPizzasWithFilters(Filters filters) {
         Session currentSession = sessionFactory.getCurrentSession();
-        Criteria criteria = currentSession.createCriteria(Pizza.class);
-        switch (filters.getSort()){
-            case 0:
-                criteria.addOrder(Order.asc("price"));
-                break;
-            case 1:
-                criteria.addOrder(Order.desc("price"));
-                break;
-            case 2:
-                criteria.addOrder(Order.asc("name"));
-                break;
-            case 3:
-                criteria.addOrder(Order.desc("name"));
-                break;
-        }
-        criteria.add(Restrictions.between("price", filters.getMinPrice(), filters.getMaxPrice()));
-        criteria.add(Restrictions.in("company", filters.getCompanyList()));
-        return criteria.list();
+        CriteriaBuilder cb = currentSession.getCriteriaBuilder();
+        CriteriaQuery<Pizza> pizzaCriteria = cb.createQuery(Pizza.class);
+        Root<Pizza> pizzaRoot = pizzaCriteria.from(Pizza.class);
+
+        pizzaCriteria.select(pizzaRoot);
+        Predicate[] predicates = new Predicate[4];
+        predicates[0] = cb.between(pizzaRoot.get("price"), filters.getMinPrice(), filters.getMaxPrice());
+
+        Expression<String> exp = pizzaRoot.get("company");
+        predicates[1]  = exp.in(filters.getCompanyList());
+
+        Expression<SizePizza> expr = pizzaRoot.get("size");
+        predicates[2]  = expr.in(filters.getSizePizzas());
+
+        Join<Pizza, Ingredient> ingredient = pizzaRoot.join("ingredients");
+        Expression<Ingredient> expres = ingredient.get("name");
+        predicates[3] = expres.in(filters.getIngredients());
+
+        pizzaCriteria.where(predicates);
+
+        Query<Pizza> query = currentSession.createQuery(pizzaCriteria);
+        return query.getResultList();
     }
 }

@@ -26,6 +26,9 @@
     </blockquote>
     <form:form action="" modelAttribute="filters" id="filters-form" role="form" method="post">
         <div class="row">
+            <security:authorize access="isAuthenticated()">
+                <h4>Здравствуйте, <security:authentication property="principal.username"/></h4>
+            </security:authorize>
             <ul class="list-inline">
                 <security:authorize access="hasRole('USER')">
                     <input type="submit" value="Личный кабинет"
@@ -33,12 +36,12 @@
                            class="small-good-item__btn-add btn btn-primary btn-sm"
                     />
                 </security:authorize>
-                <security:authorize access="hasRole('ADMIN')">
-                    <input type="submit" value="Админка"
-                           onclick="window.location.href='/pizza/list'; return false;"
-                           class="small-good-item__btn-add btn btn-danger btn-sm"
-                    />
-                </security:authorize>
+
+                <input type="submit" value="Админка"
+                       onclick="window.location.href='/pizza/list'; return false;"
+                       class="small-good-item__btn-add btn btn-danger btn-sm"
+                />
+
                 <security:authorize access="isAnonymous()">
                     <input type="submit" value="Войти"
                            onclick="window.location.href='/login'; return false;"
@@ -47,7 +50,7 @@
                 </security:authorize>
                 <security:authorize access="isAuthenticated()">
                     <input type="submit" value="Выйти"
-                           onclick="window.location.href='<c:url value="/logout" />'; return false;"
+                           onclick="window.location.href='<c:url value="/logout"/>'; return false;"
                            class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
                     />
                 </security:authorize>
@@ -67,7 +70,7 @@
         <div id="filters" class="col-md-4">
             <div class="row">
                 <div>
-                    <h4>Компании</h4>
+                    <h3>Компании</h3>
                     <div id="brands">
                         <c:forEach var="company" items="${companies}">
                             <div class="form-check"><label><form:checkbox path="companiesName"
@@ -79,12 +82,36 @@
             </div>
             <div class="row">
                 <div>
-                    <h4>Цена</h4>
+                    <h3>Цена</h3>
                     <div id="prices-label">
                         Минимальная: <form:input path="minPrice" id="min-price" name="min_price"
                                                  value="${filters.minPrice}"/>
                         Максимальная: <form:input path="maxPrice" id="max-price" name="max_price"
                                                   value="${filters.maxPrice}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <h3>Размеры</h3>
+                    <div>
+                        <c:forEach var="size" items="${sizes}">
+                            <div class="form-check"><label><form:checkbox path="sizes"
+                                                                          value="${size.name}"/> ${size.name}</label>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <h3>Категории</h3>
+                    <div>
+                        <c:forEach var="category" items="${categories}">
+                            <div class="form-check"><label><form:checkbox path="categoriesName"
+                                                                          value="${category.name}"/> ${category.name}</label>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
@@ -106,8 +133,11 @@
                 </div>
                 <div class="col-md-4">
                     <div class="small-good-item__name">${tempPizza.name} </div>
-                    <div class="small-good-item__id">Ингридиенты: ${tempPizza.ingredients.size()} </div>
-                    <div class="small-good-item__brand">Фирма: ${tempPizza.company.name}</div>
+                    <div class="small-good-item__id">Ингредиенты:
+                        <c:forEach var="ingredient"
+                                   items="${tempPizza.ingredients}">${ingredient.name}, </c:forEach></div>
+                    <div class="small-good-item__brand">Компания: <i>${tempPizza.company.name}</i></div>
+                    <div class="small-good-item__id">Размер: ${tempPizza.size.name} </div>
                     <div class="small-good-item__price">${tempPizza.price} руб.</div>
                     <input type="button" value="Купить пиццу"
                            onclick="window.open('${tempPizza.company.url}'); return false;"

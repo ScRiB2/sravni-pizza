@@ -53,6 +53,12 @@
                 <td>Компания</td>
                 <td>${pizza.company.name}</td>
             </tr>
+            <tr>
+                <td>Ингредиенты</td>
+                <td><c:forEach var="ingredient" items="${pizza.ingredients}">
+                    <p>${ingredient.name}</p>
+                </c:forEach> </td>
+            </tr>
         </table>
     </div>
 
