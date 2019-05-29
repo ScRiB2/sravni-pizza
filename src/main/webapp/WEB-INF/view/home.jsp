@@ -34,5 +34,7 @@
 <a href="${pageContext.request.contextPath}/pizza/list">Работа с пиццей</a>
 <a href="${pageContext.request.contextPath}/company/list">Список компаний</a>
 <a href="${pageContext.request.contextPath}/catalog/list">Каталог с фильтрами</a>
+<a href="${pageContext.request.contextPath}/categories/list">Категории</a>
+<a href="${pageContext.request.contextPath}/ingredients/list">Ингредиенты</a>
 </body>
 </html>

@@ -41,7 +41,18 @@
                onclick="window.location.href='/company/list'; return false;"
                class="add-button"
         />
-
+        <input type="button" value="Список категорий"
+               onclick="window.location.href='/categories/list'; return false;"
+               class="add-button"
+        />
+        <input type="button" value="Список ингредиентов"
+               onclick="window.location.href='/ingredients/list'; return false;"
+               class="add-button"
+        />
+        <input style="margin-left: 30%" type="button" value="На главную"
+               onclick="window.location.href='/catalog/list'; return false;"
+               class="add-button text-right"
+        />
         <table>
             <tr>
                 <th>Название</th>

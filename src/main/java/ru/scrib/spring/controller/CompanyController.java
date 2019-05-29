@@ -21,14 +21,14 @@ public class CompanyController {
     @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("company", companyService.getCompanies());
-        return "company-list";
+        return "company/company-list";
     }
 
     @GetMapping("/add")
     public String addCompany(Model model) {
         Company company = new Company();
         model.addAttribute("company", company);
-        return "company-form";
+        return "company/company-form";
     }
 
     @PostMapping("/save")
@@ -48,7 +48,7 @@ public class CompanyController {
     public String updateCompany(@RequestParam("companyId") long id, Model model){
         Company company = companyService.getCompany(id);
         model.addAttribute("company",company);
-        return "company-form";
+        return "company/company-form";
     }
 
     @GetMapping("/info")
@@ -56,6 +56,6 @@ public class CompanyController {
         List<Pizza> pizzas = companyService.getCompany(id).getPizzas();
         model.addAttribute("pizzas", pizzas);
         model.addAttribute("company", companyService.getCompany(id));
-        return "company-info";
+        return "company/company-info";
     }
 }

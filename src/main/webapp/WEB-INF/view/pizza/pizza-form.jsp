@@ -54,7 +54,10 @@
                 <td><form:select path="company">
                     <form:options items="${companies}" itemValue="id" itemLabel="name"/>
                 </form:select>
-                    <a href="${pageContext.request.contextPath}/company/add">Добавить</a>
+                    <input type="button" value="Добавить"
+                           onclick="window.location.href='/company/add'; return false;"
+                           class="add-button"
+                    />
                 </td>
 
             </tr>

@@ -4,13 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import ru.scrib.spring.entity.pizza.Company;
 import ru.scrib.spring.entity.pizza.Pizza;
 import ru.scrib.spring.entity.pizza.SizePizza;
 import ru.scrib.spring.service.CompanyService;
 import ru.scrib.spring.service.PizzaService;
-import ru.scrib.spring.string.StringHelper;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -42,7 +40,7 @@ public class PizzaController {
     public String listCustomers(Model theModel) {
         List<Pizza> pizzas = pizzaService.getPizzas();
         theModel.addAttribute("pizzas", pizzas);
-        return "list-pizzas";
+        return "pizza/pizza-list";
     }
 
     @GetMapping("/addPizza")
@@ -52,7 +50,7 @@ public class PizzaController {
         model.addAttribute("pizza", pizza);
         model.addAttribute("sizes", sizes);
         model.addAttribute("companies", companies);
-        return "pizza-form";
+        return "pizza/pizza-form";
     }
 
     @PostMapping("/savePizza")
@@ -75,7 +73,7 @@ public class PizzaController {
         model.addAttribute("pizza", pizza);
         model.addAttribute("sizes", sizes);
         model.addAttribute("companies", companies);
-        return "pizza-form";
+        return "pizza/pizza-form";
     }
 
     @GetMapping("/updateWithCompany")
@@ -87,7 +85,7 @@ public class PizzaController {
         model.addAttribute("pizza", pizza);
         model.addAttribute("sizes", sizes);
         model.addAttribute("companies", companies);
-        return "pizza-form";
+        return "pizza/pizza-form";
     }
 
     @GetMapping("/info")
@@ -95,6 +93,6 @@ public class PizzaController {
                             Model model) {
         Pizza pizza = pizzaService.getPizza(id);
         model.addAttribute("pizza", pizza);
-        return "pizza-info";
+        return "pizza/pizza-info";
     }
 }

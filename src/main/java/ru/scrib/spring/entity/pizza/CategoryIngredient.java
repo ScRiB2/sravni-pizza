@@ -22,7 +22,7 @@ public class CategoryIngredient {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "categoryIngredient", cascade = {CascadeType.DETACH, CascadeType.MERGE,
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryIngredient", cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     List<Ingredient> ingredients;
 

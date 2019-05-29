@@ -2,6 +2,7 @@ package ru.scrib.spring.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import ru.scrib.spring.string.StringHelper;
 import ru.scrib.spring.validation.FieldMatch;
 import ru.scrib.spring.validation.ValidEmail;
 
@@ -40,5 +41,13 @@ public class CrmUser {
     private String email;
 
     public CrmUser() {
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = StringHelper.convertFromUTF8(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = StringHelper.convertFromUTF8(lastName);
     }
 }

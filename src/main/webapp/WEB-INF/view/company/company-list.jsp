@@ -7,18 +7,18 @@
 <html>
 <head>
     <title>Список компаний</title>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <link type="text/css"
           rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/style.css"/>
     <style>
-        .img{
-            width:100px;
-            height:100px;
+        .img {
+            width: 100px;
+            height: 100px;
         }
 
-        .image-pizza{
-            max-width:100%;
+        .image-pizza {
+            max-width: 100%;
             max-height: 100%;
         }
     </style>
@@ -36,12 +36,22 @@
                onclick="window.location.href='add'; return false;"
                class="add-button"
         />
-
         <input type="button" value="Список пицц"
                onclick="window.location.href='/pizza/list'; return false;"
                class="add-button"
         />
-
+        <input type="button" value="Список категорий"
+               onclick="window.location.href='/categories/list'; return false;"
+               class="add-button"
+        />
+        <input type="button" value="Список ингредиентов"
+               onclick="window.location.href='/ingredients/list'; return false;"
+               class="add-button"
+        />
+        <input style="margin-left: 30%" type="button" value="На главную"
+               onclick="window.location.href='/catalog/list'; return false;"
+               class="add-button text-right"
+        />
         <table>
             <tr>
                 <th>Название</th>
@@ -78,7 +88,6 @@
         </table>
     </div>
 </div>
-
 
 </body>
 </html>

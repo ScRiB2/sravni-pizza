@@ -90,7 +90,7 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
                     <form:errors path="lastName" cssClass="error" />
-                    <form:input path="lastName" placeholder="Фамилие" class="form-control" />
+                    <form:input path="lastName" placeholder="Фамилия" class="form-control" />
                 </div>
             </div>
 

@@ -12,6 +12,7 @@ import ru.scrib.spring.dao.UserDAO;
 import ru.scrib.spring.dao.UserDaoImpl;
 import ru.scrib.spring.entity.user.Role;
 import ru.scrib.spring.entity.user.User;
+import ru.scrib.spring.string.StringHelper;
 import ru.scrib.spring.user.CrmUser;
 
 import javax.transaction.Transactional;

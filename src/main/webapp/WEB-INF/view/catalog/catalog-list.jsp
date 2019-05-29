@@ -9,7 +9,7 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <title>Каталог пицц</title>
+    <title>Сравни пиццу</title>
     <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700&subset=latin,cyrillic-ext' rel='stylesheet'
           type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -18,7 +18,7 @@
 <body data-page="catalogDB">
 <div class="container">
     <br/>
-    <h1 class="text-center"><big><strong>Сравнить пиццы</strong></big></h1>
+    <h1 class="text-center"><big><strong>Сравни пиццу</strong></big></h1>
     <br/>
     <blockquote class="pull-right">
         <h5>Жизнь - это в основном боль и борьба. В остальном - это любовь и пицца...</h5>
