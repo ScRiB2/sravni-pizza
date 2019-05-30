@@ -45,8 +45,9 @@ public class PizzaDaoImpl implements PizzaDao {
     @Override
     public Pizza getPizza(long id) {
         Session currentSession = sessionFactory.getCurrentSession();
-        Pizza pizza = currentSession.get(Pizza.class, id);
-        return pizza;
+        Query<Pizza> query = currentSession.createQuery("from Pizza where id=:idPizza", Pizza.class);
+        query.setParameter("idPizza", id);
+        return query.getSingleResult();
     }
 
     @Override

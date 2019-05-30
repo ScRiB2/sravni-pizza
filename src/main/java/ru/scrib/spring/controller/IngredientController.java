@@ -53,11 +53,4 @@ public class IngredientController {
         model.addAttribute("categories", categoryIngredientService.getCategories());
         return "ingredients/ingredient-form";
     }
-
-    @GetMapping("/info")
-    public String info(@RequestParam("ingredientId") long id, Model model) {
-        Ingredient ingredient = ingredientService.getIngredient(id);
-        model.addAttribute("ingredient", ingredient);
-        return "ingredients/ingredient-info";
-    }
 }

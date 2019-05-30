@@ -38,6 +38,9 @@ public class IngredientDaoImpl implements IngredientDao {
 
     @Override
     public Ingredient getIngredient(long id) {
-        return sessionFactory.getCurrentSession().get(Ingredient.class, id);
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<Ingredient> query = currentSession.createQuery("from Ingredient where id=:idIngredient", Ingredient.class);
+        query.setParameter("idIngredient", id);
+        return query.getSingleResult();
     }
 }

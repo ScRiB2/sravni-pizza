@@ -67,19 +67,15 @@
                 <c:url var="deleteLink" value="/ingredients/delete">
                     <c:param name="ingredientId" value="${ingredient.id}"/>
                 </c:url>
-                <c:url var="infoLink" value="/ingredients/info">
-                    <c:param name="ingredientId" value="${ingredient.id}"/>
-                </c:url>
                 <tr>
                     <td>${ingredient.name}</td>
                     <td>${ingredient.categoryIngredient.name}</td>
                     <td>
-                        <a href="${updateLink}">Обновить</a>
-                        |
-                        <a href="${deleteLink}"
-                           onclick="if (!(confirm('Вы точно хотите удалить этот ингредиент?'))) return false">Удалить</a>
-                        |
-                    </td>
+                    <a href="${updateLink}">Обновить</a>
+                    |
+                    <a href="${deleteLink}"
+                       onclick="if (!(confirm('Вы точно хотите удалить этот ингредиент?'))) return false">Удалить</a>
+                </td>
                 </tr>
             </c:forEach>
         </table>

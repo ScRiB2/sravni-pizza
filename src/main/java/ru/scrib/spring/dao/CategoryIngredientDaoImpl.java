@@ -38,7 +38,10 @@ public class CategoryIngredientDaoImpl implements CategoryIngredientDao {
 
     @Override
     public CategoryIngredient getCategory(long id) {
-        return sessionFactory.getCurrentSession().get(CategoryIngredient.class, id);
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<CategoryIngredient> query = currentSession.createQuery("from CategoryIngredient where id=:idCategory", CategoryIngredient.class);
+        query.setParameter("idCategory", id);
+        return query.getSingleResult();
     }
 
     @Override

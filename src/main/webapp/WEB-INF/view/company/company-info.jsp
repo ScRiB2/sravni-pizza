@@ -32,6 +32,10 @@
 </div>
 <div id="container">
     <div id=content>
+        <input type="button" value="Назад"
+               onclick="window.location.href='/company/list'; return false;"
+               class="add-button"
+        />
         <table>
             <tr>
                 <th>Название</th>

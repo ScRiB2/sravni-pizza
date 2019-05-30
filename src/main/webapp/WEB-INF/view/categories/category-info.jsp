@@ -41,20 +41,24 @@
 
             <c:forEach var="ingredient" items="${ingredients}">
                 <!-- construct an update-->
-                <c:url var="updateLink" value="/pizza/updateWithCompany">
-                    <c:param name="pizzaId" value="${tempPizza.id}"/>
-                    <c:param name="companyId" value="${company.id}"/>
+                <c:url var="updateLink" value="/ingredients/update">
+                    <c:param name="ingredientId" value="${ingredient.id}"/>
                 </c:url>
-                <c:url var="deleteLink" value="/pizza/delete">
-                    <c:param name="pizzaId" value="${tempPizza.id}"/>
+                <c:url var="deleteLink" value="/ingredients/delete">
+                    <c:param name="ingredientId" value="${ingredient.id}"/>
                 </c:url>
-                <c:url var="infoLink" value="/pizza/info">
-                    <c:param name="pizzaId" value="${tempPizza.id}"/>
+                <c:url var="infoLink" value="/ingredients/info">
+                    <c:param name="ingredientId" value="${ingredient.id}"/>
                 </c:url>
                 <tr>
                     <td>${ingredient.name}</td>
                     <td>${ingredient.pizzas.size()}</td>
-
+                    <td>
+                        <a href="${updateLink}">Обновить</a>
+                        |
+                        <a href="${deleteLink}"
+                           onclick="if (!(confirm('Вы точно хотите удалить этот ингредиент?'))) return false">Удалить</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

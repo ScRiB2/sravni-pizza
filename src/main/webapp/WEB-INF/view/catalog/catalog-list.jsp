@@ -95,9 +95,10 @@
                     break;
             }
         }
+
     </script>
 </head>
-<body data-page="catalogDB">
+<body>
 <div class="container">
     <br/>
     <h1 class="text-center"><big><strong>Сравни пиццу</strong></big></h1>
@@ -140,7 +141,8 @@
             </ul>
             <div class="col-md-3 col-md-offset-9">
                 <div class="form-group">
-                    <select onchange="sortPrice(value)" class="form-control">
+                    <select onchange="sortPrice(value)" on class="form-control">
+                        <option value="0">-</option>
                         <option value="1">Cначала дешевые</option>
                         <option value="2">Cначала дорогие</option>
                         <option value="3">По названию, А-Я</option>
@@ -221,7 +223,7 @@
                     <div class="small-good-item__name">${tempPizza.name} </div>
                     <div class="small-good-item__id">Ингредиенты:
                         <c:forEach var="ingredient"
-                                   items="${tempPizza.ingredients}">${ingredient.name}, </c:forEach></div>
+                                   items="${tempPizza.ingredients}">${ingredient.name}; </c:forEach></div>
                     <div class="small-good-item__brand">Компания: <i>${tempPizza.company.name}</i></div>
                     <div class="small-good-item__id">Размер: ${tempPizza.size.name} </div>
                     <div class="small-good-item__price">${tempPizza.price} руб.</div>
@@ -229,12 +231,10 @@
                            onclick="window.open('${tempPizza.company.url}'); return false;"
                            class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
                     />
-                    <button
-                            class="btn btn-link btn-sm js-add-to-compare"
-                            data-id=""
-                            data-category-id=""
-                    >Подробнее
-                    </button>
+                    <c:url var="updateLink" value="/pizza/update">
+                        <c:param name="pizzaId" value="${tempPizza.id}"/>
+                    </c:url>
+                    <a href="${updateLink}">Обновить</a>
                 </div>
             </li>
         </c:forEach>

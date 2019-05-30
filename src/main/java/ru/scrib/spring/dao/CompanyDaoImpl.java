@@ -41,7 +41,6 @@ public class CompanyDaoImpl implements CompanyDao {
         Query<Company> query = currentSession.createQuery("from Company where id=:idCompany", Company.class);
         query.setParameter("idCompany", id);
         return query.getSingleResult();
-        //return sessionFactory.getCurrentSession().get(Company.class, id);
     }
 
     @Override
