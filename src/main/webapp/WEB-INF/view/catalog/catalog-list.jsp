@@ -27,12 +27,12 @@
                     //for (var i=0; i<itemsArray.length; i++)
                     //  alert(itemsArray[i].getAttribute('data-price'));
                     itemsArray.sort(function (nodeA, nodeB) {
-                        var numberA =  parseInt(nodeA.getAttribute('data-price'));
-                        var numberB =  parseInt(nodeB.getAttribute('data-price'));
+                        var numberA = parseInt(nodeA.getAttribute('data-price'));
+                        var numberB = parseInt(nodeB.getAttribute('data-price'));
                         if (numberA < numberB) return -1;
                         if (numberA > numberB) return 1;
                         return 0;
-                    }).forEach( function (node) {
+                    }).forEach(function (node) {
                         parent.appendChild(node);
                     });
                     break;
@@ -51,7 +51,7 @@
                         if (numberA > numberB) return -1;
                         if (numberA < numberB) return 1;
                         return 0;
-                    }).forEach( function (node) {
+                    }).forEach(function (node) {
                         parent.appendChild(node);
                     });
                     break;
@@ -70,7 +70,7 @@
                         if (strA < strB) return -1;
                         if (strA > strB) return 1;
                         return 0;
-                    }).forEach( function (node) {
+                    }).forEach(function (node) {
                         parent.appendChild(node);
                     });
                     break;
@@ -89,7 +89,7 @@
                         if (strA > strB) return -1;
                         if (strA < strB) return 1;
                         return 0;
-                    }).forEach( function (node) {
+                    }).forEach(function (node) {
                         parent.appendChild(node);
                     });
                     break;
@@ -119,12 +119,12 @@
                            class="small-good-item__btn-add btn btn-primary btn-sm"
                     />
                 </security:authorize>
-
-                <input type="button" value="Админка"
-                       onclick="window.location.href='/pizza/list'; return false;"
-                       class="small-good-item__btn-add btn btn-danger btn-sm"
-                />
-
+                <security:authorize access="hasRole('ADMIN')">
+                    <input type="button" value="Админка"
+                           onclick="window.location.href='/pizza/list'; return false;"
+                           class="small-good-item__btn-add btn btn-danger btn-sm"
+                    />
+                </security:authorize>
                 <security:authorize access="isAnonymous()">
                     <input type="button" value="Войти"
                            onclick="window.location.href='/login'; return false;"
@@ -167,7 +167,7 @@
             <div class="row">
                 <div>
                     <h3>Цена</h3>
-                    <div id="prices-label">
+                    <div id="prices-label" class="small-good-item__brand">
                         Минимальная: <form:input path="minPrice" id="min-price" name="min_price"
                                                  value="${filters.minPrice}"/>
                         Максимальная: <form:input path="maxPrice" id="max-price" name="max_price"
@@ -215,26 +215,48 @@
     <br/>
     <ul id="goods" class="col-md-8">
         <c:forEach var="tempPizza" items="${pizzas}">
-            <li class="small-good-item row" data-price="${tempPizza.price}" data-name="${tempPizza.name}">
+            <li class="small-good-item row" style="border-radius: 6px;" data-price="${tempPizza.price}"
+                data-name="${tempPizza.name}">
                 <div class="col-md-4">
                     <img class="small-good-item__img" src="${tempPizza.image}"/>
                 </div>
                 <div class="col-md-8">
                     <div class="small-good-item__name">${tempPizza.name} </div>
-                    <div class="small-good-item__id">Ингредиенты:
+                    <div class="small-good-item__ingredients">Ингредиенты:
                         <c:forEach var="ingredient"
                                    items="${tempPizza.ingredients}">${ingredient.name}; </c:forEach></div>
-                    <div class="small-good-item__brand">Компания: <i>${tempPizza.company.name}</i></div>
-                    <div class="small-good-item__id">Размер: ${tempPizza.size.name} </div>
-                    <div class="small-good-item__price">${tempPizza.price} руб.</div>
-                    <input type="button" value="Купить пиццу"
-                           onclick="window.open('${tempPizza.company.url}'); return false;"
-                           class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
-                    />
-                    <c:url var="updateLink" value="/pizza/update">
-                        <c:param name="pizzaId" value="${tempPizza.id}"/>
-                    </c:url>
-                    <a href="${updateLink}">Обновить</a>
+                    <div class="small-good-item__brand" style="padding: 10px 0px 0px">
+                        Компания: ${tempPizza.company.name}</div>
+
+                    <div class="small-good-item__size" style="padding: 10px 0px 0px">
+                        Размер: ${tempPizza.size.name}</div>
+
+                    <div class="small-good-item__price" style="padding: 5px 0px 0px">${tempPizza.price} ₽</div>
+                    <div class="button " style="margin: 10px 0px 0px">
+                        <input type="button" id="byu-button" value="Купить пиццу"
+                               onclick="window.open('${tempPizza.company.url}'); return false;"
+                               class="small-good-item_buy_button"
+                        />
+                    </div>
+                    <security:authorize access="hasRole('ADMIN')">
+                        <div style="margin: 10px 0px 0px">
+                            <c:url var="updateLink" value="/pizza/update">
+                                <c:param name="pizzaId" value="${tempPizza.id}"/>
+                            </c:url>
+                            <input type="button" value="Обновить"
+                                   onclick="window.location.href='${updateLink}'; return false;"
+                                   class="small-good-item__btn-add btn btn-primary btn-sm"
+                            />
+                            <c:url var="deleteLink" value="/pizza/delete">
+                                <c:param name="pizzaId" value="${tempPizza.id}"/>
+                            </c:url>
+                            <input type="button" value="Удалить"
+                                   onclick="if (!(confirm('Вы точно хотите удалить эту пиццу?'))) return false;
+                                           window.location.href='${deleteLink}'; return false;"
+                                   class="small-good-item__btn-add btn btn-danger btn-sm"
+                            />
+                        </div>
+                    </security:authorize>
                 </div>
             </li>
         </c:forEach>

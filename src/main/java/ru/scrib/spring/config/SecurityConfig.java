@@ -32,26 +32,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/customer/showForm*").hasAnyRole("MANAGER", "ADMIN")
-                .antMatchers("/customer/save*").hasAnyRole("MANAGER", "ADMIN")
-                .antMatchers("/customer/delete").hasRole("ADMIN")
-                .antMatchers("/customer/**").hasRole("EMPLOYEE")
-                .antMatchers("/resources/**").permitAll()
-                .and()
-                .formLogin()
+                .antMatchers("/pizza/**", "/categories/**", "/company/**", "/ingredients/**").hasRole("ADMIN")
+                .antMatchers("/lk/**").hasRole("USER");
+
+        http.formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticateTheUser")
-                .permitAll()
-                .and()
-                .logout().permitAll()
-                .and()
-                .exceptionHandling().accessDeniedPage("/access-denied");
+                .defaultSuccessUrl("/")
+                .successHandler(customAuthenticationSuccessHandler)
+                .permitAll();
+
+        http.logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .permitAll();
+
+        http.authorizeRequests()
+                .anyRequest().permitAll();
+
+        http.exceptionHandling()
+                .accessDeniedPage("/access-denied");
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/resources/**");
-//    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/resources/**");
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

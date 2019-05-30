@@ -63,14 +63,16 @@ public class PizzaController {
     }
 
     @GetMapping("/delete")
-    public String deletePizza(@RequestParam("pizzaId") long id) {
+    public String deletePizza(@RequestParam("pizzaId") long id, HttpServletRequest request) {
         pizzaService.deletePizza(id);
+        String referer = request.getHeader("referer");
+        if(referer.equals("http://localhost:8080/")) return "redirect:/";
         return "redirect:/pizza/list";
     }
 
     @GetMapping("/update")
     public String updatePizza(@RequestParam("pizzaId") long id,
-                              Model model) {
+                              Model model, HttpServletRequest request) {
         model.addAttribute("pizza", pizzaService.getPizza(id));
         model.addAttribute("sizes", sizes);
         model.addAttribute("companies", companyService.getCompanies());
