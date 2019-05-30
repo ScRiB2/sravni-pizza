@@ -155,7 +155,7 @@
             <div class="row">
                 <div>
                     <h3>Компании</h3>
-                    <div id="brands">
+                    <div>
                         <c:forEach var="company" items="${companies}">
                             <div class="form-check"><label><form:checkbox path="companiesName"
                                                                           value="${company.name}"/> ${company.name}</label>
