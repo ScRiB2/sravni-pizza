@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LkController {
     @GetMapping("/lk")
-    public String showLkPage(){
+    public String showLkPage() {
         return "lk";
     }
 }

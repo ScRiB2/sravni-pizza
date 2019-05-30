@@ -25,7 +25,7 @@ public class CategoriesController {
     }
 
     @GetMapping("/add")
-    public String addCategory(Model model){
+    public String addCategory(Model model) {
         CategoryIngredient categoryIngredient = new CategoryIngredient();
         model.addAttribute("category", categoryIngredient);
         return "categories/category-form";
@@ -39,20 +39,20 @@ public class CategoriesController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("categoryId") long id){
+    public String delete(@RequestParam("categoryId") long id) {
         categoryIngredientService.deleteCategory(id);
         return "redirect:/categories/list";
     }
 
     @GetMapping("/update")
-    public String update(@RequestParam("categoryId") long id, Model model){
+    public String update(@RequestParam("categoryId") long id, Model model) {
         CategoryIngredient category = categoryIngredientService.getCategory(id);
-        model.addAttribute("category",category);
+        model.addAttribute("category", category);
         return "categories/category-form";
     }
 
     @GetMapping("/info")
-    public String info(@RequestParam("categoryId") long id, Model model){
+    public String info(@RequestParam("categoryId") long id, Model model) {
         List<Ingredient> ingredients = categoryIngredientService.getCategory(id).getIngredients();
         model.addAttribute("ingredients", ingredients);
         model.addAttribute("category", categoryIngredientService.getCategory(id));

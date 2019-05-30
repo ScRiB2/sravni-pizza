@@ -8,18 +8,18 @@
 
 <head>
     <title>Список пицц</title>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <link type="text/css"
           rel="stylesheet"
           href="${pageContext.request.contextPath}/resources/css/style.css"/>
     <style>
-        .img{
-            width:100px;
-            height:100px;
+        .img {
+            width: 100px;
+            height: 100px;
         }
 
-        .image-pizza{
-            max-width:100%;
+        .image-pizza {
+            max-width: 100%;
             max-height: 100%;
         }
     </style>

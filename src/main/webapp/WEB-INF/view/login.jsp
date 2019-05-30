@@ -54,7 +54,7 @@
 
     <div class="login-links">
         <p class="text-center">Еще нет аккаунта? <a class="txt-brand"
-                                                     href="${pageContext.request.contextPath}/register/showForm"><font
+                                                    href="${pageContext.request.contextPath}/register/showForm"><font
                 color=#29aafe>Регистрируйся</font></a>
         </p>
     </div>

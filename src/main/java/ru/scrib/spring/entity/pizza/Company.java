@@ -2,7 +2,6 @@ package ru.scrib.spring.entity.pizza;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -34,14 +33,6 @@ public class Company {
 
     public Company(String name) {
         this.name = name;
-    }
-
-    public void addPizza(Pizza tempPizza) {
-        if (pizzas == null) {
-            pizzas = new ArrayList<>();
-        }
-        pizzas.add(tempPizza);
-        tempPizza.setCompany(this);
     }
 
     @Override

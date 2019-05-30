@@ -9,10 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.scrib.spring.dao.RoleDAO;
 import ru.scrib.spring.dao.UserDAO;
-import ru.scrib.spring.dao.UserDaoImpl;
 import ru.scrib.spring.entity.user.Role;
 import ru.scrib.spring.entity.user.User;
-import ru.scrib.spring.string.StringHelper;
 import ru.scrib.spring.user.CrmUser;
 
 import javax.transaction.Transactional;
@@ -34,24 +32,18 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public User findByUserName(String userName) {
-        // check the database if the user already exists
         return userDao.findByUserName(userName);
     }
 
     @Transactional
     public void save(CrmUser crmUser) {
         User user = new User();
-        // assign user details to the user object
         user.setUserName(crmUser.getUserName());
         user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
         user.setFirstName(crmUser.getFirstName());
         user.setLastName(crmUser.getLastName());
         user.setEmail(crmUser.getEmail());
-
-        // give user default role of "employee"
         user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_USER")));
-
-        // save user in the database
         userDao.save(user);
     }
 

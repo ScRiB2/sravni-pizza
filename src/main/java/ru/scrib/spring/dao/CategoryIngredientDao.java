@@ -6,8 +6,12 @@ import java.util.List;
 
 public interface CategoryIngredientDao {
     List<CategoryIngredient> getCategories();
+
     void saveCategory(CategoryIngredient categoryIngredient);
+
     void deleteCategory(long id);
+
     CategoryIngredient getCategory(long id);
+
     List<CategoryIngredient> getCategoriesByName(String[] categoryName);
 }

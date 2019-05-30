@@ -13,7 +13,7 @@
 
 Здравствуйте, <security:authentication property="principal.username"/>
 <br>
-<a href="${pageContext.request.contextPath}/" >На главную</a>
+<a href="${pageContext.request.contextPath}/">На главную</a>
 
 <form:form action="${pageContext.request.contextPath}/logout" method="post">
     <input type="submit" value="Выйти">

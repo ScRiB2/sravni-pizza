@@ -2,7 +2,6 @@ package ru.scrib.spring.entity.pizza;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,8 +32,8 @@ public class CategoryIngredient {
         this.name = name;
     }
 
-    public void addIngredient(Ingredient ingredient){
-        if(ingredients == null)
+    public void addIngredient(Ingredient ingredient) {
+        if (ingredients == null)
             ingredients = new ArrayList<>();
         ingredients.add(ingredient);
         ingredient.setCategoryIngredient(this);

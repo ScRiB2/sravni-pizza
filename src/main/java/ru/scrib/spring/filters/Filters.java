@@ -2,14 +2,12 @@ package ru.scrib.spring.filters;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.scrib.spring.entity.pizza.CategoryIngredient;
 import ru.scrib.spring.entity.pizza.Company;
-import ru.scrib.spring.entity.pizza.Ingredient;
 import ru.scrib.spring.entity.pizza.SizePizza;
 import ru.scrib.spring.string.StringHelper;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -17,13 +15,13 @@ import java.util.List;
 public class Filters {
     private int minPrice;
     private int maxPrice;
-    private int sort;
     private String[] companiesName;
     private List<Company> companyList;
     private String[] sizes;
     private String[] categoriesName;
     private List<String> ingredients;
     private SizePizza[] sizePizzas;
+    private Set<String> categories;
 
     public Filters() {
     }

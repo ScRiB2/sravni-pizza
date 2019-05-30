@@ -1,10 +1,7 @@
 package ru.scrib.spring.dao;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.hibernate.type.IntegerType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,16 +79,17 @@ public class PizzaDaoImpl implements PizzaDao {
         predicates[0] = cb.between(pizzaRoot.get("price"), filters.getMinPrice(), filters.getMaxPrice());
 
         Expression<String> exp = pizzaRoot.get("company");
-        predicates[1]  = exp.in(filters.getCompanyList());
+        predicates[1] = exp.in(filters.getCompanyList());
 
         Expression<SizePizza> expr = pizzaRoot.get("size");
-        predicates[2]  = expr.in(filters.getSizePizzas());
+        predicates[2] = expr.in(filters.getSizePizzas());
 
         Join<Pizza, Ingredient> ingredient = pizzaRoot.join("ingredients");
-        Expression<Ingredient> expres = ingredient.get("name");
-        predicates[3] = expres.in(filters.getIngredients());
+        Join<Ingredient, CategoryIngredient> category = ingredient.join("categoryIngredient");
+        Expression<CategoryIngredient> expres = category.get("name");
+        predicates[3] = expres.in(filters.getCategories());
 
-        pizzaCriteria.where(predicates);
+        pizzaCriteria.where(predicates).distinct(true);
 
         Query<Pizza> query = currentSession.createQuery(pizzaCriteria);
         return query.getResultList();

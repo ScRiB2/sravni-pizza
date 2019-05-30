@@ -45,7 +45,7 @@ public class CategoryIngredientDaoImpl implements CategoryIngredientDao {
     public List<CategoryIngredient> getCategoriesByName(String[] categoryName) {
         Session currentSession = sessionFactory.getCurrentSession();
         Query<CategoryIngredient> query;
-        if(categoryName == null || categoryName.length == 0)
+        if (categoryName == null || categoryName.length == 0)
             query = currentSession.createQuery("from CategoryIngredient");
         else {
             query = currentSession.createQuery("from CategoryIngredient where name in (:n) ");

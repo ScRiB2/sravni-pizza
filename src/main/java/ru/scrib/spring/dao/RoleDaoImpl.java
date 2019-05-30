@@ -11,27 +11,27 @@ import ru.scrib.spring.entity.user.Role;
 @Repository
 public class RoleDaoImpl implements RoleDAO {
 
-	// need to inject the session factory
-	@Autowired
-	private SessionFactory sessionFactory;
+    // need to inject the session factory
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	public Role findRoleByName(String theRoleName) {
+    public Role findRoleByName(String theRoleName) {
 
-		// get the current hibernate session
-		Session currentSession = sessionFactory.getCurrentSession();
+        // get the current hibernate session
+        Session currentSession = sessionFactory.getCurrentSession();
 
-		// now retrieve/read from database using name
-		Query<Role> theQuery = currentSession.createQuery("from Role where name=:roleName", Role.class);
-		theQuery.setParameter("roleName", theRoleName);
-		
-		Role theRole = null;
-		
-		try {
-			theRole = theQuery.getSingleResult();
-		} catch (Exception e) {
-			theRole = null;
-		}
-		
-		return theRole;
-	}
+        // now retrieve/read from database using name
+        Query<Role> theQuery = currentSession.createQuery("from Role where name=:roleName", Role.class);
+        theQuery.setParameter("roleName", theRoleName);
+
+        Role theRole = null;
+
+        try {
+            theRole = theQuery.getSingleResult();
+        } catch (Exception e) {
+            theRole = null;
+        }
+
+        return theRole;
+    }
 }

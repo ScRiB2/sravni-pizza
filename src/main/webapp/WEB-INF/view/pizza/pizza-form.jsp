@@ -65,12 +65,12 @@
                     <form:hidden path="ingredients"/>
                     <p>${ingredient.name}</p>
                 </c:forEach>
-                    <input type="button" value="Изменить" onclick="window.location.href='addIngredient'"
+                    <input type="submit" name="add-ingredient" value="Изменить"
                            class="add-button"/></td>
             </tr>
             <tr>
                 <td><label></label></td>
-                <td><input type="submit" value="Сохранить" class="save"/></td>
+                <td><input type="submit" name="save" value="Сохранить" class="save"/></td>
             </tr>
             </tbody>
         </table>

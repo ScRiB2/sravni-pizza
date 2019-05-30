@@ -39,21 +39,22 @@ public class CompanyController {
     }
 
     @GetMapping("/delete")
-    public String deleteCompany(@RequestParam("companyId") long id){
+    public String deleteCompany(@RequestParam("companyId") long id) {
         companyService.deleteCompany(id);
         return "redirect:/company/list";
     }
 
     @GetMapping("/update")
-    public String updateCompany(@RequestParam("companyId") long id, Model model){
+    public String updateCompany(@RequestParam("companyId") long id, Model model) {
         Company company = companyService.getCompany(id);
-        model.addAttribute("company",company);
+        model.addAttribute("company", company);
         return "company/company-form";
     }
 
     @GetMapping("/info")
-    public String infoCompany(@RequestParam("companyId") long id, Model model){
-        List<Pizza> pizzas = companyService.getCompany(id).getPizzas();
+    public String infoCompany(@RequestParam("companyId") long id, Model model) {
+        Company company = companyService.getCompany(id);
+        List<Pizza> pizzas = company.getPizzas();
         model.addAttribute("pizzas", pizzas);
         model.addAttribute("company", companyService.getCompany(id));
         return "company/company-info";

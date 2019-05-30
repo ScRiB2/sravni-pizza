@@ -11,9 +11,16 @@ import ru.scrib.spring.entity.pizza.SizePizza;
 import ru.scrib.spring.service.CompanyService;
 import ru.scrib.spring.service.IngredientService;
 import ru.scrib.spring.service.PizzaService;
+import ru.scrib.spring.string.StringHelper;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/pizza")
@@ -47,18 +54,12 @@ public class PizzaController {
     }
 
     @GetMapping("/addPizza")
-    public String addPizza(Model model) {
+    public String addPizza(Model model, HttpServletRequest request) {
         model.addAttribute("pizza", new Pizza());
         model.addAttribute("sizes", sizes);
         model.addAttribute("companies", companyService.getCompanies());
         model.addAttribute("ingredients", ingredientService.getIngredients());
         return "pizza/pizza-form";
-    }
-
-    @PostMapping("/savePizza")
-    public String savePizza(@ModelAttribute("pizza") Pizza pizza) {
-        pizzaService.savePizza(pizza);
-        return "redirect:/pizza/list";
     }
 
     @GetMapping("/delete")
@@ -85,21 +86,28 @@ public class PizzaController {
         return "pizza/pizza-info";
     }
 
-    @GetMapping("/addIngredient")
-    public String addIngredientForPizza(@ModelAttribute("pizza") Pizza pizza, Model model){
-        model.addAttribute("ingredientsInDb", ingredientService.getIngredients());
-        model.addAttribute("pizza", pizza);
-        return "pizza/pizza-ingredient";
-    }
-
     @PostMapping("/addPizza")
     public String addPostPizza(@ModelAttribute("pizza") Pizza pizza, Model model) {
+        pizza.setName(StringHelper.convertFromUTF8(pizza.getName()));
+        String str = pizza.getCompany().getName();
+        int index = str.indexOf("'");
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(pizza.getCompany().getName());
+        List<Long> ids = new ArrayList<>();
+        while (m.find()) {
+            ids.add(Long.parseLong(m.group()));
+        }
+        Company company = companyService.getCompany(ids.get(1));
+        pizza.setCompany(company);
+
+
         List<Ingredient> ingredients = pizza.getIngredients();
         List<Ingredient> newIngredients = new ArrayList<>();
         for (Ingredient ingredient : ingredients) {
             newIngredients.add(ingredientService.getIngredient(Long.parseLong(ingredient.getName())));
         }
         pizza.setIngredients(newIngredients);
+        model.addAttribute("pizza", pizza);
         model.addAttribute("sizes", sizes);
         model.addAttribute("companies", companyService.getCompanies());
 

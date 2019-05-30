@@ -55,9 +55,9 @@
             </tr>
             <tr>
                 <td>Ингредиенты</td>
-                <td><c:forEach var="ingredient" items="${pizza.ingredients}">
-                    <p>${ingredient.name}</p>
-                </c:forEach> </td>
+                <td><p><c:forEach var="ingredient" items="${pizza.ingredients}">
+                    ${ingredient.name};
+                </c:forEach></p></td>
             </tr>
         </table>
     </div>

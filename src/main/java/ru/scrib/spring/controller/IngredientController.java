@@ -26,7 +26,7 @@ public class IngredientController {
     }
 
     @GetMapping("/add")
-    public String addCategory(Model model){
+    public String addCategory(Model model) {
         Ingredient ingredient = new Ingredient();
         model.addAttribute("ingredient", ingredient);
         model.addAttribute("categories", categoryIngredientService.getCategories());
@@ -41,21 +41,21 @@ public class IngredientController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("ingredientId") long id){
+    public String delete(@RequestParam("ingredientId") long id) {
         ingredientService.deleteIngredient(id);
         return "redirect:/ingredients/list";
     }
 
     @GetMapping("/update")
-    public String update(@RequestParam("ingredientId") long id, Model model){
+    public String update(@RequestParam("ingredientId") long id, Model model) {
         Ingredient ingredient = ingredientService.getIngredient(id);
-        model.addAttribute("ingredient",ingredient);
+        model.addAttribute("ingredient", ingredient);
         model.addAttribute("categories", categoryIngredientService.getCategories());
         return "ingredients/ingredient-form";
     }
 
     @GetMapping("/info")
-    public String info(@RequestParam("ingredientId") long id, Model model){
+    public String info(@RequestParam("ingredientId") long id, Model model) {
         Ingredient ingredient = ingredientService.getIngredient(id);
         model.addAttribute("ingredient", ingredient);
         return "ingredients/ingredient-info";

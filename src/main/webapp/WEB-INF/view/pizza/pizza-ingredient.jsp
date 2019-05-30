@@ -39,6 +39,12 @@
                 <th>Добавить</th>
             </tr>
             <form:form action="addPizza" modelAttribute="pizza" method="post">
+                <form:hidden path="id"/>
+                <form:hidden path="name"/>
+                <form:hidden path="image"/>
+                <form:hidden path="price"/>
+                <form:hidden path="size"/>
+                <form:hidden path="company" tabindex=""/>
                 <c:forEach var="ingredient" items="${ingredientsInDb}">
                     <tr>
                         <td>${ingredient.name}</td>
@@ -56,10 +62,6 @@
             </form:form>
         </table>
     </div>
-
-    <p>
-        <a href="${pageContext.request.contextPath}/pizza/addPizza">Назад</a>
-    </p>
 </div>
 
 

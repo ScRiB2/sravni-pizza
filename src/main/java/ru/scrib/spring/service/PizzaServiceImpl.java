@@ -12,7 +12,11 @@ import ru.scrib.spring.string.StringHelper;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class PizzaServiceImpl implements PizzaService {
@@ -37,16 +41,29 @@ public class PizzaServiceImpl implements PizzaService {
     @Transactional
     public void savePizza(Pizza pizza) {
         pizza.setName(StringHelper.convertFromUTF8(pizza.getName()));
+
         long idCompany = Long.parseLong(pizza.getCompany().getName());
         Company company = companyDao.getCompany(idCompany);
+        pizza.setCompany(company);
+
         List<Ingredient> ingredients = new ArrayList<>();
-        for (Ingredient ingredient : pizza.getIngredients()) {
-            long idIngredient = Long.parseLong(ingredient.getName());
-            ingredient = ingredientDao.getIngredient(idIngredient);
-            ingredients.add(ingredient);
+        if (pizza.getIngredients() == null) {
+            ingredients.add(ingredientDao.getIngredient(10));
+            pizza.setIngredients(ingredients);
+        } else {
+            Pattern p = Pattern.compile("\\d+");
+            Matcher m = p.matcher(pizza.getIngredients().get(0).getName());
+            List<Long> ids = new ArrayList<>();
+            while (m.find()) {
+                ids.add(Long.parseLong(m.group()));
+            }
+            for (Long id : ids) {
+                Ingredient ingredient = ingredientDao.getIngredient(id);
+                ingredients.add(ingredient);
+            }
         }
         pizza.setIngredients(ingredients);
-        pizza.setCompany(company);
+
         pizzaDao.savePizza(pizza);
     }
 
@@ -76,14 +93,11 @@ public class PizzaServiceImpl implements PizzaService {
         filters.setCompanyList(companies);
 
         List<CategoryIngredient> categories = categoryIngredientDao.getCategoriesByName(filters.getCategoriesName());
-        List<String> ingredients = new ArrayList<>();
+        Set<String> categorySet = new HashSet<>();
         for (CategoryIngredient category : categories) {
-            List<Ingredient> ingredientList = category.getIngredients();
-            for (Ingredient ingredient : ingredientList) {
-                ingredients.add(ingredient.getName());
-            }
+            categorySet.add(category.getName());
         }
-        filters.setIngredients(ingredients);
+        filters.setCategories(categorySet);
 
         if (filters.getSizes() == null || filters.getSizes().length == 0)
             filters.setSizePizzas(SizePizza.values());

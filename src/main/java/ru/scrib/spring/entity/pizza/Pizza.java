@@ -2,7 +2,6 @@ package ru.scrib.spring.entity.pizza;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.ArrayList;

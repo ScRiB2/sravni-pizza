@@ -32,38 +32,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/register/**", "/processRegistrationForm", "/pizza/**", "/company/**",
-                        "/**", "/categories/**", "/ingredients/**")
-                .permitAll();
-
-        http.formLogin()
-                .loginPage("/login")
+                .antMatchers("/customer/showForm*").hasAnyRole("MANAGER", "ADMIN")
+                .antMatchers("/customer/save*").hasAnyRole("MANAGER", "ADMIN")
+                .antMatchers("/customer/delete").hasRole("ADMIN")
+                .antMatchers("/customer/**").hasRole("EMPLOYEE")
+                .antMatchers("/resources/**").permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/showMyLoginPage")
                 .loginProcessingUrl("/authenticateTheUser")
-                .defaultSuccessUrl("/")
-                .successHandler(customAuthenticationSuccessHandler)
-                .permitAll();
-
-        http.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/")
-                .permitAll();
-
-        http.authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/lk/**").hasRole("USER");
-
-        http.authorizeRequests()
-                .anyRequest()
-                .authenticated();
-
-        http.exceptionHandling()
-                .accessDeniedPage("/access-denied");
+                .permitAll()
+                .and()
+                .logout().permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied");
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/**");
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/resources/**");
+//    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

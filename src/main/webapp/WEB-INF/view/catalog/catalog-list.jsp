@@ -14,6 +14,88 @@
           type='text/css'>
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" type="text/css">
+    <script>
+        function sortPrice(x) {
+            switch (x) {
+                case "1" :
+                    nodeList = document.querySelectorAll('li');
+                    var itemsArray = [];
+                    var parent = nodeList[0].parentNode;
+                    for (var i = 0; i < nodeList.length; i++) {
+                        itemsArray.push(parent.removeChild(nodeList[i]));
+                    }
+                    //for (var i=0; i<itemsArray.length; i++)
+                    //  alert(itemsArray[i].getAttribute('data-price'));
+                    itemsArray.sort(function (nodeA, nodeB) {
+                        var numberA =  parseInt(nodeA.getAttribute('data-price'));
+                        var numberB =  parseInt(nodeB.getAttribute('data-price'));
+                        if (numberA < numberB) return -1;
+                        if (numberA > numberB) return 1;
+                        return 0;
+                    }).forEach( function (node) {
+                        parent.appendChild(node);
+                    });
+                    break;
+                case "2" :
+                    nodeList = document.querySelectorAll('li');
+                    var itemsArray = [];
+                    var parent = nodeList[0].parentNode;
+                    for (var i = 0; i < nodeList.length; i++) {
+                        itemsArray.push(parent.removeChild(nodeList[i]));
+                    }
+                    //for (var i=0; i<itemsArray.length; i++)
+                    //  alert(itemsArray[i].getAttribute('data-price'));
+                    itemsArray.sort(function (nodeA, nodeB) {
+                        var numberA = parseInt(nodeA.getAttribute('data-price'));
+                        var numberB = parseInt(nodeB.getAttribute('data-price'));
+                        if (numberA > numberB) return -1;
+                        if (numberA < numberB) return 1;
+                        return 0;
+                    }).forEach( function (node) {
+                        parent.appendChild(node);
+                    });
+                    break;
+                case "3" :
+                    nodeList = document.querySelectorAll('li');
+                    var itemsArray = [];
+                    var parent = nodeList[0].parentNode;
+                    for (var i = 0; i < nodeList.length; i++) {
+                        itemsArray.push(parent.removeChild(nodeList[i]));
+                    }
+                    //for (var i=0; i<itemsArray.length; i++)
+                    //  alert(itemsArray[i].getAttribute('data-price'));
+                    itemsArray.sort(function (nodeA, nodeB) {
+                        var strA = nodeA.getAttribute('data-name');
+                        var strB = nodeB.getAttribute('data-name');
+                        if (strA < strB) return -1;
+                        if (strA > strB) return 1;
+                        return 0;
+                    }).forEach( function (node) {
+                        parent.appendChild(node);
+                    });
+                    break;
+                case "4" :
+                    nodeList = document.querySelectorAll('li');
+                    var itemsArray = [];
+                    var parent = nodeList[0].parentNode;
+                    for (var i = 0; i < nodeList.length; i++) {
+                        itemsArray.push(parent.removeChild(nodeList[i]));
+                    }
+                    //for (var i=0; i<itemsArray.length; i++)
+                    //  alert(itemsArray[i].getAttribute('data-price'));
+                    itemsArray.sort(function (nodeA, nodeB) {
+                        var strA = nodeA.getAttribute('data-name');
+                        var strB = nodeB.getAttribute('data-name');
+                        if (strA > strB) return -1;
+                        if (strA < strB) return 1;
+                        return 0;
+                    }).forEach( function (node) {
+                        parent.appendChild(node);
+                    });
+                    break;
+            }
+        }
+    </script>
 </head>
 <body data-page="catalogDB">
 <div class="container">
@@ -58,12 +140,12 @@
             </ul>
             <div class="col-md-3 col-md-offset-9">
                 <div class="form-group">
-                    <form:select path="sort" id="sort" name="sort" class="form-control">
-                        <form:option value="0">Cначала дешевые</form:option>
-                        <form:option value="1">Cначала дорогие</form:option>
-                        <form:option value="2">По названию, А-Я</form:option>
-                        <form:option value="3">По названию, Я-А</form:option>
-                    </form:select>
+                    <select onchange="sortPrice(value)" class="form-control">
+                        <option value="1">Cначала дешевые</option>
+                        <option value="2">Cначала дорогие</option>
+                        <option value="3">По названию, А-Я</option>
+                        <option value="4">По названию, Я-А</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -131,11 +213,11 @@
     <br/>
     <ul id="goods" class="col-md-8">
         <c:forEach var="tempPizza" items="${pizzas}">
-            <li class="small-good-item row">
+            <li class="small-good-item row" data-price="${tempPizza.price}" data-name="${tempPizza.name}">
                 <div class="col-md-4">
                     <img class="small-good-item__img" src="${tempPizza.image}"/>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-8">
                     <div class="small-good-item__name">${tempPizza.name} </div>
                     <div class="small-good-item__id">Ингредиенты:
                         <c:forEach var="ingredient"

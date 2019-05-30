@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Сохранить ингредиент</title>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link type="text/css"
           rel="stylesheet"
