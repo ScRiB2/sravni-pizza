@@ -1,6 +1,6 @@
 package ru.scrib.spring.dao;
 
-import ru.scrib.spring.entity.Role;
+import ru.scrib.spring.entity.user.Role;
 
 public interface RoleDAO {
 

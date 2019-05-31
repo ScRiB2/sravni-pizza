@@ -49,7 +49,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <form:errors path="userName" cssClass="error" />
+                    <form:errors path="userName" cssClass="error"/>
                     <form:input path="userName" class="form-control" placeholder="Ваш логин"/>
                 </div>
             </div>
@@ -59,8 +59,8 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <form:errors path="password" cssClass="error" />
-                    <form:password path="password" placeholder="Пароль" class="form-control" />
+                    <form:errors path="password" cssClass="error"/>
+                    <form:password path="password" placeholder="Пароль" class="form-control"/>
                 </div>
             </div>
 
@@ -69,8 +69,8 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <form:errors path="matchingPassword" cssClass="error" />
-                    <form:password path="matchingPassword" placeholder="Повторите пароль" class="form-control" />
+                    <form:errors path="matchingPassword" cssClass="error"/>
+                    <form:password path="matchingPassword" placeholder="Повторите пароль" class="form-control"/>
                 </div>
             </div>
 
@@ -79,8 +79,8 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <form:errors path="firstName" cssClass="error" />
-                    <form:input path="firstName" placeholder="Имя" class="form-control" />
+                    <form:errors path="firstName" cssClass="error"/>
+                    <form:input path="firstName" placeholder="Имя" class="form-control"/>
                 </div>
             </div>
 
@@ -89,8 +89,8 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <form:errors path="lastName" cssClass="error" />
-                    <form:input path="lastName" placeholder="Фамилие" class="form-control" />
+                    <form:errors path="lastName" cssClass="error"/>
+                    <form:input path="lastName" placeholder="Фамилия" class="form-control"/>
                 </div>
             </div>
 
@@ -99,11 +99,10 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                    <form:errors path="email" cssClass="error" />
-                    <form:input path="email" placeholder="Почта" class="form-control" />
+                    <form:errors path="email" cssClass="error"/>
+                    <form:input path="email" placeholder="Почта" class="form-control"/>
                 </div>
             </div>
-
 
 
             <button class="btn btn-primary btn-block" type="submit">ЗАРЕГИСТРИРОВАТЬСЯ</button>

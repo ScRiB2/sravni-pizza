@@ -2,21 +2,10 @@ from selenium import webdriver
 import psycopg2 as p2
 from contextlib import closing
 
-def write_csv(data):
-    with open('DodoPizzas.csv', 'a', newline="", encoding='utf-8') as f:
-        writer = csv.writer(f)
-        print("write " + data['name'])
-
-        writer.writerow([data['name'],
-                         data['image'],
-                         data['ingridients'],
-                         data['prices']]
-                        )
-
 
 def get_list_price(pizza):
     controls = pizza.find_element_by_class_name('product__controls')
-    sizes = controls.find_elements_by_class_name('product__size-item')
+    sizes = controls.find_elements_by_class_name('product__size-control-item')
     prices = list()
     try:
         for size in sizes:
@@ -27,30 +16,55 @@ def get_list_price(pizza):
     return prices
 
 
+ingridientiks = []
+pizzik = []
+
 def pizza(url, driver):
     driver.get(url)
     print("start")
     pizzas_div = driver.find_element_by_id('pizzas')
     pizza_container = pizzas_div.find_elements_by_class_name('menu__section-row-outer')
-    pizzik = []
     for pizzas in pizza_container:
-        pizzas = pizzas.find_elements_by_class_name(
-            'product__inner.product__inner_meta.product__inner_meta-with-controls')
-        for pizza in pizzas:
+
+        pizzass = pizzas.find_elements_by_class_name(
+            'menu__section-product.menu__section-product_4-1.product')
+        print(len(pizzass))
+        for pizza in pizzass:
             image = pizza.find_element_by_class_name('product__image').find_element_by_class_name(
                 'product__image-img').get_attribute('src')
             name = pizza.find_element_by_class_name('product__name').text.strip()
-            ingridients = pizza.find_element_by_class_name(
-                'product__description.product__description_meta').text.strip()  # .split(',')
+            ingr = []
+            print('s')
+            for ingridient in  pizza.find_element_by_class_name(
+                'product__description.product__description_meta').text.split(','):
+                print(ingridient)
+                if ' и ' in ingridient:
+                    for ing in ingridient.split(' и '):
+                        ingridientiks.append(ing.lower().strip())
+                        ingr.append(ing.lower().strip())
+                else:
+                    ingridientiks.append(ingridient.lower().strip())
+                    ingr.append(ingridient.lower().strip())
             prices = get_list_price(pizza)
             prices.sort()
-            prices = ','.join(prices)
-            pizzik.append({'image': image,
-                     'name': name,
-                     'ingridients': ingridients,
-                     'prices': prices}
-                         )
+            print()
+            print(ingr)
+            print()
+            print(1, prices)
+            for price, size in zip(prices, ["STANDART", "MEDIUM", "BIG"]):
+
+                pizzik.append(
+                    {
+                        'name': name,
+                        'image': image,
+                        'prices': price,
+                        'size': size,
+                        'company_id': 1,
+                        'ingridient': ingr
+                    }
+                )
     del(pizzik[4])
+    print(pizzik)
     return pizzik
 
 
@@ -69,8 +83,12 @@ def main():
     url = "https://dodopizza.ru/voronezh#pizzas"
     pizzas = pizza(url, driver)
     driver.quit()
-    insertInDatabase("JustForTest", "postgres", "odifus2312", pizzas)
-
+    ingridientiks.remove("соберите свою пиццу 35 см с двумя разными вкусами")
+#    insertInDatabase("JustForTest", "postgres", "odifus2312", pizzas)
+    return ingridientiks
 
 if __name__ == '__main__':
     main()
+    ingridientiks = set(ingridientiks)
+    ingridientiks = list(ingridientiks)
+    print(len(ingridientiks), ingridientiks)

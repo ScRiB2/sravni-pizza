@@ -1,4 +1,4 @@
-package ru.scrib.spring.entity;
+package ru.scrib.spring.entity.user;
 
 import lombok.Getter;
 import lombok.Setter;

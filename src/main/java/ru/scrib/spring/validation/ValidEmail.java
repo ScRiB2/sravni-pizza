@@ -13,6 +13,8 @@ import java.lang.annotation.Target;
 
 public @interface ValidEmail {
     String message() default "Неправильно введена почта";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
