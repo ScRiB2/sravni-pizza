@@ -167,11 +167,13 @@
             <div class="row">
                 <div>
                     <h3>Цена</h3>
-                    <div id="prices-label" class="small-good-item__brand">
-                        Минимальная: <form:input path="minPrice" id="min-price" name="min_price"
-                                                 value="${filters.minPrice}"/>
-                        Максимальная: <form:input path="maxPrice" id="max-price" name="max_price"
-                                                  value="${filters.maxPrice}"/>
+                    <div class="small-good-item__brand">
+                        Мин.: <form:input path="minPrice" id="min-price" name="min_price"
+                                          value="${filters.minPrice}"/>
+                    </div>
+                    <div class="small-good-item__brand">
+                        Макс.: <form:input path="maxPrice" id="max-price" name="max_price"
+                                           value="${filters.maxPrice}"/>
                     </div>
                 </div>
             </div>

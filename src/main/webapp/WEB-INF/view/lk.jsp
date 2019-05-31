@@ -30,7 +30,7 @@
         </security:authorize>
         <ul class="list-inline">
             <security:authorize access="hasRole('USER')">
-                <input type="button" value="Главня"
+                <input type="button" value="Главная"
                        onclick="window.location.href='/'; return false;"
                        class="small-good-item__btn-add btn btn-primary btn-sm"
                 />
@@ -39,12 +39,6 @@
                 <input type="button" value="Админка"
                        onclick="window.location.href='/pizza/list'; return false;"
                        class="small-good-item__btn-add btn btn-danger btn-sm"
-                />
-            </security:authorize>
-            <security:authorize access="isAnonymous()">
-                <input type="button" value="Войти"
-                       onclick="window.location.href='/login'; return false;"
-                       class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
                 />
             </security:authorize>
             <security:authorize access="isAuthenticated()">
