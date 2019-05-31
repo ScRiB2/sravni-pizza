@@ -23,6 +23,9 @@
     <div class="login-block">
         <img src="${pageContext.request.contextPath}/resources/image/1.png" alt="Scanfcode">
         <h1>Введите свои данные</h1>
+        <c:if test="${newUser != null}">
+            <h5 class="failed">Успешная регистрация!</h5>
+        </c:if>
         <form:form action="${pageContext.request.contextPath}/authenticateTheUser"
                    method="post">
             <c:if test="${param.error != null}">
@@ -51,7 +54,7 @@
 
     <div class="login-links">
         <p class="text-center">Еще нет аккаунта? <a class="txt-brand"
-                                                     href="${pageContext.request.contextPath}/register/showForm"><font
+                                                    href="${pageContext.request.contextPath}/register/showForm"><font
                 color=#29aafe>Регистрируйся</font></a>
         </p>
     </div>

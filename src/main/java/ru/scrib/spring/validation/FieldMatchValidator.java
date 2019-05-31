@@ -22,12 +22,11 @@ public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Obje
             final Object firstObj = new BeanWrapperImpl(value).getPropertyValue(firstFieldName);
             final Object secondObj = new BeanWrapperImpl(value).getPropertyValue(secondFieldName);
             valid = firstObj == null && secondObj == null || firstObj != null && firstObj.equals(secondObj);
-        }
-        catch (final Exception ignore){
+        } catch (final Exception ignore) {
 
         }
 
-        if (!valid){
+        if (!valid) {
             context.buildConstraintViolationWithTemplate(message)
                     .addPropertyNode(firstFieldName)
                     .addConstraintViolation()

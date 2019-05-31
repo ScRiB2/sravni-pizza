@@ -1,9 +1,10 @@
 /* Form Style */
-.admin-login{
-    background-color:#e5e7ed
+.admin-login {
+    background-color: #e5e7ed
 }
+
 .admin-login main {
-    margin:8% auto 5%
+    margin: 8% auto 5%
 }
 
 .form-horizontal {

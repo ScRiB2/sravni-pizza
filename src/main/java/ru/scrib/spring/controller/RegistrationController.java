@@ -7,7 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ru.scrib.spring.entity.User;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ru.scrib.spring.entity.user.User;
 import ru.scrib.spring.service.UserService;
 import ru.scrib.spring.user.CrmUser;
 
@@ -39,30 +40,24 @@ public class RegistrationController {
     public String processRegistrationForm(
             @Valid @ModelAttribute("crmUser") CrmUser theCrmUser,
             BindingResult theBindingResult,
-            Model theModel) {
+            Model theModel,
+            RedirectAttributes redirectAttributes) {
 
         String userName = theCrmUser.getUserName();
-        logger.info("Processing registration form for: " + userName);
 
-        // form validation
         if (theBindingResult.hasErrors()) {
             return "register";
         }
 
-        // check the database if user already exists
         User existing = userService.findByUserName(userName);
         if (existing != null) {
             theModel.addAttribute("crmUser", new CrmUser());
-            theModel.addAttribute("registrationError", "Username already exists.");
-
-            logger.warning("Username already exists.");
+            theModel.addAttribute("registrationError", "Имя пользователя уже существует.");
             return "register";
         }
-        // create user account
         userService.save(theCrmUser);
 
-        logger.info("Successfully created user: " + userName);
-
-        return "registration-confirmation";
+        redirectAttributes.addFlashAttribute("newUser", true);
+        return "redirect:/login";
     }
 }

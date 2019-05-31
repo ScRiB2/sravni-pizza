@@ -11,30 +11,27 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import javax.servlet.FilterRegistration;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
-import java.util.logging.Logger;
 
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages = "ru.scrib.spring")
+@ComponentScan("ru.scrib.spring")
 @PropertySource("classpath:persistence-postgresql.properties")
 public class AppConfig implements WebMvcConfigurer {
 
     @Autowired
-    Environment env;    //For hold data read from properties files
+    Environment env;
 
-    private Logger logger = Logger.getLogger(getClass().getName());
 
     @Bean
     public ViewResolver viewResolver() {
@@ -44,14 +41,8 @@ public class AppConfig implements WebMvcConfigurer {
         return viewResolver;
     }
 
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/");
-    }
-
     @Bean
-    public DataSource securityDataSource(){
+    public DataSource securityDataSource() {
         ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
         try {
             securityDataSource.setDriverClass(env.getProperty("jdbc.driver"));
@@ -59,7 +50,6 @@ public class AppConfig implements WebMvcConfigurer {
             e.printStackTrace();
         }
         securityDataSource.setJdbcUrl(env.getProperty("jdbc.url"));
-        logger.info(env.getProperty("jdbc.url"));
         securityDataSource.setUser(env.getProperty("jdbc.user"));
         securityDataSource.setPassword(env.getProperty("jdbc.password"));
         securityDataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("connection.pool.initialPoolSize")));
@@ -86,12 +76,9 @@ public class AppConfig implements WebMvcConfigurer {
 
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory(){
-
-        // create session factorys
+    public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 
-        // set the properties
         sessionFactory.setDataSource(securityDataSource());
         sessionFactory.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
         sessionFactory.setHibernateProperties(getHibernateProperties());
@@ -108,5 +95,17 @@ public class AppConfig implements WebMvcConfigurer {
         txManager.setSessionFactory(sessionFactory);
 
         return txManager;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 }
