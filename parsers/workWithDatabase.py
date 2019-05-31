@@ -21,13 +21,13 @@ def insertInDatabase(yourDatabase, user, password, ingridientsResult):
                             password="{}".format(password), host="localhost")) as con:
         with con.cursor() as cursor:
             con.autocommit = True
-            category = [{'name': "фрукты"}, {'name': 'овощи'}, {'name': 'мясо'}, {'name': 'рыба'}, {'name': 'соус'},
-                        {'name': 'прочее'}, {'name': 'сыр'}]
+            category = [{'name': "Сладкая"}, {'name': 'С овощами'}, {'name': 'Мясная'}, {'name': 'Морская'}, {'name': 'соус'},
+                        {'name': 'Прочее'}, {'name': 'С сыром'}]
             cursor.executemany("INSERT INTO category_ingredient(name) VALUES "
                                "(%(name)s)", category)
-            company = [{'name': 'Додо пицца', 'url': "https://dodopizza.ru/voronezh#pizzas"},
-                       {'name': 'Сушивок пицца', 'url': "https://voronezh.pizzasushiwok.ru/pizza/"},
-                       {'name': 'Ямма пицца', 'url': "https://yummypizza.ru/sections/pitstsy"}]
+            company = [{'name': 'Додо Пицца', 'url': "https://dodopizza.ru/voronezh#pizzas"},
+                       {'name': 'ПиццаСушивок', 'url': "https://voronezh.pizzasushiwok.ru/pizza/"},
+                       {'name': 'YmmY', 'url': "https://yummypizza.ru/sections/pitstsy"}]
             cursor.executemany("INSERT INTO company(name, url) VALUES (%(name)s, %(url)s)", company)
             cursor.executemany("INSERT INTO ingredient(name, category_id) VALUES "
                                "(%(name)s, %(category_id)s)", ingridientsResult)

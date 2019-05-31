@@ -74,7 +74,7 @@ def insertInDatabase(yourDatabase, user, password, pizzas):
                             password="{}".format(password), host="localhost")) as con:
         with con.cursor() as cursor:
             con.autocommit = True
-            company = [{'name': 'Додо пицца'}, {'name': 'Сушивок пицца'}, {'name': 'Ямма пицца'}]
+            company = [{'name': 'Додо Пицца'}, {'name': 'ПиццаСушиВок'}, {'name': 'YmmY'}]
             cursor.executemany("INSERT INTO company(name) VALUES (%(name)s)", company)
             #cursor.executemany("INSERT INTO pizza(name, size, price, image, company_id) VALUES "
             #                   "(%(name)s, %(size)s, %(prices)s, %(image)s, %(company_id)s)", pizzas)
