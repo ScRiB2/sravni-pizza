@@ -107,50 +107,50 @@
         <h5>Жизнь - это в основном боль и борьба. В остальном - это любовь и пицца...</h5>
         <small><i>Бенедикт Смит</i></small>
     </blockquote>
-    <form:form action="" modelAttribute="filters" id="filters-form" role="form" method="post">
-        <div class="row">
-            <security:authorize access="isAuthenticated()">
-                <h4>Здравствуйте, <security:authentication property="principal.username"/></h4>
+    <div class="row">
+        <security:authorize access="isAuthenticated()">
+            <h4>Здравствуйте, <security:authentication property="principal.username"/></h4>
+        </security:authorize>
+        <ul class="list-inline">
+            <security:authorize access="hasRole('USER')">
+                <input type="button" value="Личный кабинет"
+                       onclick="window.location.href='/lk'; return false;"
+                       class="small-good-item__btn-add btn btn-primary btn-sm"
+                />
             </security:authorize>
-            <ul class="list-inline">
-                <security:authorize access="hasRole('USER')">
-                    <input type="button" value="Личный кабинет"
-                           onclick="window.location.href='/lk'; return false;"
-                           class="small-good-item__btn-add btn btn-primary btn-sm"
-                    />
-                </security:authorize>
-                <security:authorize access="hasRole('ADMIN')">
-                    <input type="button" value="Админка"
-                           onclick="window.location.href='/pizza/list'; return false;"
-                           class="small-good-item__btn-add btn btn-danger btn-sm"
-                    />
-                </security:authorize>
-                <security:authorize access="isAnonymous()">
-                    <input type="button" value="Войти"
-                           onclick="window.location.href='/login'; return false;"
-                           class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
-                    />
-                </security:authorize>
-                <security:authorize access="isAuthenticated()">
-                    <input type="button" value="Выйти"
-                           onclick="window.location.href='<c:url value="/logout"/>'; return false;"
-                           class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
-                    />
-                </security:authorize>
+            <security:authorize access="hasRole('ADMIN')">
+                <input type="button" value="Админка"
+                       onclick="window.location.href='/pizza/list'; return false;"
+                       class="small-good-item__btn-add btn btn-danger btn-sm"
+                />
+            </security:authorize>
+            <security:authorize access="isAnonymous()">
+                <input type="button" value="Войти"
+                       onclick="window.location.href='/login'; return false;"
+                       class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
+                />
+            </security:authorize>
+            <security:authorize access="isAuthenticated()">
+                <input type="button" value="Выйти"
+                       onclick="window.location.href='<c:url value="/logout"/>'; return false;"
+                       class="small-good-item__btn-add btn btn-info btn-sm js-add-to-cart"
+                />
+            </security:authorize>
 
-            </ul>
-            <div class="col-md-3 col-md-offset-9">
-                <div class="form-group">
-                    <select onchange="sortPrice(value)" on class="form-control">
-                        <option value="0">-</option>
-                        <option value="1">Cначала дешевые</option>
-                        <option value="2">Cначала дорогие</option>
-                        <option value="3">По названию, А-Я</option>
-                        <option value="4">По названию, Я-А</option>
-                    </select>
-                </div>
+        </ul>
+        <div class="col-md-3 col-md-offset-9">
+            <div class="form-group">
+                <select onchange="sortPrice(value)" on class="form-control">
+                    <option value="0">-</option>
+                    <option value="1">Cначала дешевые</option>
+                    <option value="2">Cначала дорогие</option>
+                    <option value="3">По названию, А-Я</option>
+                    <option value="4">По названию, Я-А</option>
+                </select>
             </div>
         </div>
+    </div>
+    <form:form action="" modelAttribute="filters" id="filters-form" role="form" method="post" cssStyle="position: sticky; top: 0">
         <div id="filters" class="col-md-4">
             <div class="row">
                 <div>
